@@ -4,13 +4,6 @@ import { SITE_TITLE } from '../consts';
 
 <header class="header">
 	<nav class="nav" aria-label="Main navigation">
-		<!-- Brand/Logo -->
-		<div class="nav__brand">
-			<a href="/" class="nav__brand-link" aria-label="Go to homepage">
-				{SITE_TITLE}
-			</a>
-		</div>
-
 		<!-- Mobile Menu Button -->
 		<button 
 			class="nav__toggle" 
@@ -36,6 +29,18 @@ import { SITE_TITLE } from '../consts';
 					<a href="/about" class="nav__link" data-page="about">About</a>
 				</li>
 			</ul>
+		</div>
+
+		<!-- Brand/Logo - Centered -->
+		<div class="nav__brand">
+			<a href="/" class="nav__brand-link" aria-label="Go to homepage">
+				{SITE_TITLE}
+			</a>
+		</div>
+
+		<!-- Right side utility (placeholder for future features) -->
+		<div class="nav__utility">
+			<!-- Future: Search, Subscribe, etc. -->
 		</div>
 	</nav>
 </header>
@@ -115,19 +120,23 @@ import { SITE_TITLE } from '../consts';
 		position: relative;
 	}
 
-	/* Brand */
+	/* Brand - Centered */
 	.nav__brand {
-		flex-shrink: 0;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 1;
 	}
 
 	.nav__brand-link {
 		font-family: var(--font-serif);
-		font-size: var(--text-xl);
-		font-weight: 700;
+		font-size: var(--text-2xl);
+		font-weight: 400; /* Regular weight like The Atlantic */
 		color: var(--color-primary);
 		text-decoration: none;
 		transition: color var(--transition-smooth);
-		letter-spacing: -0.025em;
+		letter-spacing: -0.02em;
+		line-height: 1.1;
 	}
 
 	.nav__brand-link:hover {
@@ -138,6 +147,12 @@ import { SITE_TITLE } from '../consts';
 		outline: 2px solid var(--color-accent);
 		outline-offset: 2px;
 		border-radius: var(--radius-sm);
+	}
+
+	/* Utility area for future features */
+	.nav__utility {
+		width: 2rem; /* Same width as mobile toggle for balance */
+		height: 2rem;
 	}
 
 	/* Mobile Menu Toggle */
@@ -231,11 +246,12 @@ import { SITE_TITLE } from '../consts';
 		padding: var(--space-3) var(--space-6);
 		color: var(--color-secondary);
 		text-decoration: none;
-		font-weight: 500;
-		font-size: var(--text-base);
+		font-weight: 400; /* Regular weight like The Atlantic */
+		font-size: var(--text-sm); /* Smaller, body text size */
 		transition: all var(--transition-smooth);
 		border-radius: 0;
 		position: relative;
+		font-family: var(--font-sans);
 	}
 
 	.nav__link:hover {
@@ -251,7 +267,7 @@ import { SITE_TITLE } from '../consts';
 
 	.nav__link--active {
 		color: var(--color-accent);
-		font-weight: 600;
+		font-weight: 400; /* Keep regular weight even when active */
 		background: var(--color-background-subtle);
 	}
 
@@ -287,14 +303,15 @@ import { SITE_TITLE } from '../consts';
 
 		.nav__list {
 			flex-direction: row;
-			gap: var(--space-2);
+			gap: var(--space-6); /* More spacing like The Atlantic */
 			padding: 0;
 		}
 
 		.nav__link {
-			padding: var(--space-2) var(--space-4);
-			border-radius: var(--radius-md);
+			padding: var(--space-2) 0; /* Minimal padding for clean look */
+			border-radius: 0;
 			font-size: var(--text-sm);
+			position: relative;
 		}
 
 		.nav__link--active::before {
@@ -302,7 +319,18 @@ import { SITE_TITLE } from '../consts';
 		}
 
 		.nav__link--active {
-			background: var(--color-background-subtle);
+			background: none;
+			color: var(--color-accent);
+		}
+
+		.nav__link--active::after {
+			content: '';
+			position: absolute;
+			bottom: -2px;
+			left: 0;
+			right: 0;
+			height: 1px;
+			background: var(--color-accent);
 		}
 	}
 
@@ -313,12 +341,16 @@ import { SITE_TITLE } from '../consts';
 		}
 
 		.nav__brand-link {
-			font-size: var(--text-2xl);
+			font-size: var(--text-3xl); /* Slightly larger for desktop */
 		}
 
 		.nav__link {
-			font-size: var(--text-base);
-			padding: var(--space-3) var(--space-5);
+			font-size: var(--text-sm); /* Keep small, body text size */
+			padding: var(--space-2) 0;
+		}
+
+		.nav__list {
+			gap: var(--space-8); /* Even more spacing on large screens */
 		}
 	}
 
