@@ -1,0 +1,98 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+	title: string;
+	description: string;
+	image?: ImageMetadata;
+	canonical?: string;
+	noindex?: boolean;
+}
+
+const { 
+	title, 
+	description, 
+	image,
+	canonical,
+	noindex = false 
+} = Astro.props;
+---
+
+<BaseLayout 
+	title={title} 
+	description={description} 
+	image={image}
+	canonical={canonical}
+	noindex={noindex}
+>
+	<div class="page-content">
+		<slot />
+	</div>
+</BaseLayout>
+
+<style>
+	.page-content {
+		max-width: 100%;
+	}
+	
+	.page-content h1 {
+		font-size: 2.441em;
+		margin-bottom: 1rem;
+		color: rgb(var(--black));
+	}
+	
+	.page-content h2 {
+		font-size: 1.953em;
+		margin-top: 2rem;
+		margin-bottom: 1rem;
+		color: rgb(var(--black));
+	}
+	
+	.page-content h3 {
+		font-size: 1.563em;
+		margin-top: 1.5rem;
+		margin-bottom: 0.75rem;
+		color: rgb(var(--black));
+	}
+	
+	.page-content p {
+		margin-bottom: 1.5rem;
+		line-height: 1.7;
+	}
+	
+	.page-content ul,
+	.page-content ol {
+		margin-bottom: 1.5rem;
+		padding-left: 2rem;
+	}
+	
+	.page-content li {
+		margin-bottom: 0.5rem;
+		line-height: 1.7;
+	}
+	
+	.page-content code {
+		background: rgb(var(--gray-light));
+		padding: 0.2em 0.4em;
+		border-radius: 4px;
+		font-size: 0.9em;
+	}
+	
+	.page-content img {
+		max-width: 100%;
+		height: auto;
+		border-radius: 8px;
+		margin: 1.5rem 0;
+	}
+	
+	@media (max-width: 720px) {
+		.page-content h1 {
+			font-size: 1.953em;
+		}
+		
+		.page-content h2 {
+			font-size: 1.563em;
+		}
+	}
+</style>

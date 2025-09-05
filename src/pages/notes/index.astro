@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
 import FormattedDate from '../../components/FormattedDate.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
@@ -10,7 +10,7 @@ const notes = (await getCollection('notes')).sort(
 );
 ---
 
-<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+<PageLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
 	<style>
 		main {
 			width: 960px;
@@ -100,4 +100,4 @@ const notes = (await getCollection('notes')).sort(
 			}
 		</ul>
 	</section>
-</BaseLayout>
+</PageLayout>

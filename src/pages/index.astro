@@ -1,9 +1,9 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
+import PageLayout from '../layouts/PageLayout.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 ---
 
-<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+<PageLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
 	<h1>🧑‍🚀 Hello, Astronaut!</h1>
 	<p>
 		Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
@@ -34,4 +34,4 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 		<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
 		by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
 	</p>
-</BaseLayout>
+</PageLayout>
