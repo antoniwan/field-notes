@@ -4,16 +4,16 @@ const packageJson = await import('../../package.json');
 const version = packageJson.version;
 ---
 
-<footer class="footer">
-	<div class="footer-content">
-		<div class="footer-info">
-			<p class="footer-text">
+<footer class="bg-subtle border-t border-border mt-20">
+	<div class="container container-2xl mx-auto py-12 px-6 text-center">
+		<div class="mb-8">
+			<p class="text-muted text-sm mb-4">
 				&copy; {today.getFullYear()} Field Notes on Modern Humanity
 			</p>
-			<div class="footer-licenses">
-				<p class="license-text">
-					<strong>Content:</strong> <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> • 
-					<strong>Code:</strong> <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener">MIT</a> • 
+			<div class="mb-0">
+				<p class="text-muted text-xs m-0 leading-relaxed">
+					<strong>Content:</strong> <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" class="text-accent no-underline hover:underline">CC BY-NC-SA 4.0</a> • 
+					<strong>Code:</strong> <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener" class="text-accent no-underline hover:underline">MIT</a> • 
 					<strong>Version:</strong> {version}
 				</p>
 			</div>
@@ -21,78 +21,7 @@ const version = packageJson.version;
 	</div>
 </footer>
 <style>
-	.footer {
-		background-color: var(--color-background-subtle);
-		border-top: 1px solid var(--color-border);
-		margin-top: var(--space-20);
-	}
-
-	.footer-content {
-		max-width: var(--max-width-2xl);
-		margin: 0 auto;
-		padding: var(--space-12) var(--space-6);
-		text-align: center;
-	}
-
-	.footer-info {
-		margin-bottom: var(--space-8);
-	}
-
-	.footer-text {
-		color: var(--color-muted);
-		font-size: var(--text-sm);
-		margin-bottom: var(--space-4);
-	}
-
-	.footer-licenses {
-		margin-bottom: 0;
-	}
-
-	.license-text {
-		color: var(--color-muted);
-		font-size: var(--text-xs);
-		margin: 0;
-		line-height: var(--leading-relaxed);
-	}
-
-	.license-text a {
-		color: var(--color-accent);
-		text-decoration: none;
-	}
-
-	.license-text a:hover {
-		text-decoration: underline;
-	}
-
-	.footer-social {
-		display: flex;
-		justify-content: center;
-		gap: var(--space-4);
-	}
-
-	.social-link {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 40px;
-		height: 40px;
-		color: var(--color-muted);
-		text-decoration: none;
-		border-radius: var(--radius-md);
-		transition: all 0.2s ease;
-	}
-
-	.social-link:hover {
-		color: var(--color-accent);
-		background-color: var(--color-background);
-		text-decoration: none;
-	}
-
-	.social-link:focus {
-		outline: 2px solid var(--color-accent);
-		outline-offset: 2px;
-	}
-
+	/* Responsive adjustments for footer */
 	@media (max-width: 768px) {
 		.footer-content {
 			padding: var(--space-8) var(--space-4);
@@ -104,10 +33,6 @@ const version = packageJson.version;
 
 		.license-text {
 			font-size: 0.7rem;
-		}
-
-		.footer-social {
-			gap: var(--space-3);
 		}
 	}
 </style>
