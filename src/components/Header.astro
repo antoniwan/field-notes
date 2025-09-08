@@ -130,7 +130,7 @@ import { SITE_TITLE } from '../consts';
 
 	.nav__brand-link {
 		font-family: var(--font-serif);
-		font-size: var(--text-2xl);
+		font-size: var(--text-xs); /* Extra tiny on mobile */
 		font-weight: 400; /* Regular weight like The Atlantic */
 		color: var(--color-primary);
 		text-decoration: none;
@@ -334,6 +334,13 @@ import { SITE_TITLE } from '../consts';
 		}
 	}
 
+	/* Tablet */
+	@media (min-width: 768px) {
+		.nav__brand-link {
+			font-size: var(--text-sm); /* Small size for tablet */
+		}
+	}
+
 	/* Large Desktop */
 	@media (min-width: 1024px) {
 		.nav {
@@ -341,7 +348,7 @@ import { SITE_TITLE } from '../consts';
 		}
 
 		.nav__brand-link {
-			font-size: var(--text-3xl); /* Slightly larger for desktop */
+			font-size: var(--text-2xl); /* Larger for desktop */
 		}
 
 		.nav__link {
