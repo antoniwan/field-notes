@@ -1,115 +1,24 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import PageLayout from '../../layouts/PageLayout.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
+import NoteGrid from '../../components/NoteGrid.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
 const notes = (await getCollection('notes')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
-
-// Helper function to truncate text
-function truncateText(text: string, maxLength: number = 120): string {
-	if (text.length <= maxLength) return text;
-	return text.substring(0, maxLength).trim() + '...';
-}
 ---
 
 <PageLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-	<style>
-		/* Line clamp utility for description text */
-		.line-clamp-2 {
-			display: -webkit-box;
-			-webkit-line-clamp: 2;
-			-webkit-box-orient: vertical;
-			overflow: hidden;
-		}
-
-		/* Focus states for accessibility */
-		a:focus {
-			outline: 2px solid var(--color-accent);
-			outline-offset: 2px;
-		}
-
-		/* Subtle entrance animation */
-		article {
-			animation: fadeInUp 0.6s ease-out;
-		}
-
-		article:nth-child(1) { animation-delay: 0.1s; }
-		article:nth-child(2) { animation-delay: 0.2s; }
-		article:nth-child(3) { animation-delay: 0.3s; }
-		article:nth-child(4) { animation-delay: 0.4s; }
-		article:nth-child(5) { animation-delay: 0.5s; }
-		article:nth-child(6) { animation-delay: 0.6s; }
-
-		@keyframes fadeInUp {
-			from {
-				opacity: 0;
-				transform: translateY(20px);
-			}
-			to {
-				opacity: 1;
-				transform: translateY(0);
-			}
-		}
-
-		/* Mobile optimizations */
-		@media (max-width: 768px) {
-			.grid {
-				gap: 2rem;
-			}
-		}
-
-		@media (max-width: 640px) {
-			.grid {
-				gap: 1.5rem;
-			}
-		}
-	</style>
-	
 	<div class="max-w-6xl mx-auto px-6 py-16">
-		<header class="text-center mb-20">
-			<h1 class="text-5xl font-serif font-bold text-primary mb-6">Field Notes</h1>
-			<p class="text-xl text-secondary max-w-2xl mx-auto leading-relaxed">
-				Thoughts, insights, and discoveries from the field.
-			</p>
-		</header>
-		
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-			{
-				notes.map((post) => (
-					<article class="group">
-						<a href={`/notes/${post.id}/`} class="block group-hover:opacity-80 transition-opacity duration-300">
-							{post.data.heroImage && (
-								<div class="aspect-[4/3] mb-6 overflow-hidden rounded-lg">
-									<Image 
-										width={400} 
-										height={300} 
-										src={post.data.heroImage} 
-										alt={post.data.title}
-										class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-									/>
-								</div>
-							)}
-							<div class="space-y-3">
-								<h2 class="text-xl font-serif font-semibold text-primary group-hover:text-accent transition-colors duration-200">
-									{post.data.title}
-								</h2>
-								{post.data.description && (
-									<p class="text-secondary text-sm leading-relaxed line-clamp-2">
-										{post.data.description}
-									</p>
-								)}
-								<time class="text-xs text-muted font-medium uppercase tracking-wide">
-									<FormattedDate date={post.data.pubDate} />
-								</time>
-							</div>
-						</a>
-					</article>
-				))
-			}
-		</div>
+		<NoteGrid 
+			notes={notes}
+			title="Field Notes"
+			description="Thoughts, insights, and discoveries from the field."
+			showTitle={true}
+			showDescription={true}
+			columns={3}
+			variant="default"
+		/>
 	</div>
 </PageLayout>

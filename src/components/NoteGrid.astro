@@ -1,0 +1,303 @@
+---
+import NoteCard from './NoteCard.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	notes: CollectionEntry<'notes'>[];
+	title?: string;
+	description?: string;
+	showTitle?: boolean;
+	showDescription?: boolean;
+	columns?: 1 | 2 | 3 | 4;
+	variant?: 'default' | 'masonry' | 'featured-first';
+	maxItems?: number;
+	className?: string;
+	emptyMessage?: string;
+}
+
+const {
+	notes,
+	title,
+	description,
+	showTitle = false,
+	showDescription = false,
+	columns = 3,
+	variant = 'default',
+	maxItems,
+	className = '',
+	emptyMessage = 'No notes found.'
+} = Astro.props;
+
+// Limit notes if maxItems is specified
+const displayNotes = maxItems ? notes.slice(0, maxItems) : notes;
+
+// Grid configuration based on variant and columns
+const getGridConfig = () => {
+	if (variant === 'featured-first' && displayNotes.length > 0) {
+		return {
+			gridClass: 'note-grid note-grid--featured-first',
+			columns: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+		};
+	}
+	
+	if (variant === 'masonry') {
+		return {
+			gridClass: 'note-grid note-grid--masonry',
+			columns: `grid-cols-1 md:grid-cols-2 lg:grid-cols-${columns}`
+		};
+	}
+	
+	return {
+		gridClass: 'note-grid',
+		columns: `grid-cols-1 md:grid-cols-2 lg:grid-cols-${columns}`
+	};
+};
+
+const gridConfig = getGridConfig();
+---
+
+{displayNotes.length > 0 ? (
+	<section class={`note-grid-section ${className}`}>
+		{(showTitle || showDescription) && (
+			<header class="note-grid__header">
+				{showTitle && title && (
+					<h2 class="note-grid__title">{title}</h2>
+				)}
+				{showDescription && description && (
+					<p class="note-grid__description">{description}</p>
+				)}
+			</header>
+		)}
+		
+		<div class={`${gridConfig.gridClass} ${gridConfig.columns}`}>
+			{displayNotes.map((note, index) => {
+				const isFeatured = variant === 'featured-first' && index === 0;
+				const cardVariant = isFeatured ? 'featured' : 'default';
+				
+				return (
+					<NoteCard
+						title={note.data.title}
+						description={note.data.description}
+						pubDate={note.data.pubDate}
+						slug={note.id}
+						heroImage={note.data.heroImage}
+						updatedDate={note.data.updatedDate}
+						variant={cardVariant}
+						showImage={true}
+					/>
+				);
+			})}
+		</div>
+	</section>
+) : (
+	<div class="note-grid__empty">
+		<p class="note-grid__empty-message">{emptyMessage}</p>
+	</div>
+)}
+
+<style>
+	.note-grid-section {
+		width: 100%;
+	}
+
+	.note-grid__header {
+		margin-bottom: var(--space-12);
+		text-align: center;
+	}
+
+	.note-grid__title {
+		font-family: var(--font-serif);
+		font-size: var(--text-3xl);
+		font-weight: 700;
+		color: var(--color-primary);
+		margin: 0 0 var(--space-4) 0;
+		line-height: var(--leading-tight);
+	}
+
+	.note-grid__description {
+		font-size: var(--text-lg);
+		color: var(--color-secondary);
+		margin: 0;
+		max-width: 600px;
+		margin-left: auto;
+		margin-right: auto;
+		line-height: var(--leading-relaxed);
+	}
+
+	.note-grid {
+		display: grid;
+		gap: var(--space-8);
+		width: 100%;
+	}
+
+	/* Default grid layout */
+	.note-grid {
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+	}
+
+	@media (min-width: 768px) {
+		.note-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.note-grid {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+
+	/* Featured first variant */
+	.note-grid--featured-first {
+		grid-template-columns: 1fr;
+	}
+
+	@media (min-width: 768px) {
+		.note-grid--featured-first {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.note-grid--featured-first {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+
+	/* Masonry variant */
+	.note-grid--masonry {
+		grid-template-rows: masonry;
+	}
+
+	/* Responsive column adjustments */
+	.note-grid.grid-cols-1 {
+		grid-template-columns: repeat(1, minmax(0, 1fr));
+	}
+
+	.note-grid.grid-cols-2 {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.note-grid.grid-cols-3 {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	.note-grid.grid-cols-4 {
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+	}
+
+	/* Responsive breakpoints */
+	@media (max-width: 640px) {
+		.note-grid {
+			grid-template-columns: 1fr;
+			gap: var(--space-6);
+		}
+
+		.note-grid__title {
+			font-size: var(--text-2xl);
+		}
+
+		.note-grid__description {
+			font-size: var(--text-base);
+		}
+	}
+
+	@media (min-width: 640px) and (max-width: 768px) {
+		.note-grid.grid-cols-2 {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (min-width: 768px) and (max-width: 1024px) {
+		.note-grid.grid-cols-3 {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.note-grid.grid-cols-3 {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		.note-grid.grid-cols-4 {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+
+	@media (min-width: 1280px) {
+		.note-grid.grid-cols-4 {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+		}
+	}
+
+	/* Empty state */
+	.note-grid__empty {
+		text-align: center;
+		padding: var(--space-16) var(--space-8);
+	}
+
+	.note-grid__empty-message {
+		font-size: var(--text-lg);
+		color: var(--color-muted);
+		margin: 0;
+		font-style: italic;
+	}
+
+	/* Animation for grid items */
+	.note-grid > * {
+		animation: fadeInUp 0.6s ease-out;
+	}
+
+	.note-grid > *:nth-child(1) { animation-delay: 0.1s; }
+	.note-grid > *:nth-child(2) { animation-delay: 0.2s; }
+	.note-grid > *:nth-child(3) { animation-delay: 0.3s; }
+	.note-grid > *:nth-child(4) { animation-delay: 0.4s; }
+	.note-grid > *:nth-child(5) { animation-delay: 0.5s; }
+	.note-grid > *:nth-child(6) { animation-delay: 0.6s; }
+
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	/* Focus management for keyboard navigation */
+	.note-grid:focus-within {
+		outline: none;
+	}
+
+	/* Print styles */
+	@media print {
+		.note-grid {
+			display: block;
+		}
+
+		.note-grid > * {
+			page-break-inside: avoid;
+			margin-bottom: var(--space-8);
+		}
+	}
+
+	/* High contrast mode support */
+	@media (prefers-contrast: high) {
+		.note-grid__title {
+			color: #000000;
+		}
+
+		.note-grid__description {
+			color: #333333;
+		}
+	}
+
+	/* Reduced motion support */
+	@media (prefers-reduced-motion: reduce) {
+		.note-grid > * {
+			animation: none;
+		}
+	}
+</style>

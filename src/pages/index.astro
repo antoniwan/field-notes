@@ -1,22 +1,52 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import NoteGrid from '../components/NoteGrid.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { getCollection } from 'astro:content';
+
+// Get the latest notes
+const allNotes = await getCollection('notes');
+const latestNotes = allNotes
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 6); // Show latest 6 notes
 ---
 
 <PageLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
 	<div class="text-center py-20 mb-16">
-		<h1 class="text-5xl font-bold text-primary mb-6 leading-tight">Field Notes on Modern Humanity</h1>
+		<h1 class="sr-only">Field Notes on Modern Humanity</h1>
 		<p class="text-xl text-secondary mb-8 max-w-2xl mx-auto leading-relaxed">
 			Observations on the human experience in our digital age.
 		</p>
-		<div class="flex gap-4 justify-center flex-wrap">
-			<a href="/notes" class="inline-flex items-center justify-center px-6 py-3 rounded-md font-semibold no-underline transition-all border-2 border-transparent bg-accent text-white hover:bg-accent-hover transform hover:-translate-y-px">Read Notes</a>
-			<a href="/about" class="inline-flex items-center justify-center px-6 py-3 rounded-md font-semibold no-underline transition-all border-2 border-accent bg-transparent text-accent hover:bg-accent hover:text-white">About</a>
-		</div>
 	</div>
+	
+	<section class="container">
+		<NoteGrid 
+			notes={latestNotes}
+			title="Latest Notes"
+			description="Recent thoughts and observations on modern humanity"
+			showTitle={false}
+			showDescription={false}
+			columns={3}
+			variant="featured-first"
+			className="mb-16"
+		/>
+	</section>
 </PageLayout>
 
 <style>
+	/* Screen reader only class for visually hidden content */
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
 	/* Responsive adjustments for hero section */
 	@media (max-width: 768px) {
 		.hero {

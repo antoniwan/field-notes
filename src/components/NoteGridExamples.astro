@@ -1,0 +1,99 @@
+---
+// This file demonstrates different usage patterns for NoteGrid and NoteCard components
+// It's not used in the actual site but serves as documentation and examples
+
+import NoteGrid from './NoteGrid.astro';
+import NoteCard from './NoteCard.astro';
+import { getCollection } from 'astro:content';
+
+// Example: Get notes for different use cases
+const allNotes = await getCollection('notes');
+const latestNotes = allNotes
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
+
+const featuredNotes = allNotes
+	.filter(note => note.data.heroImage) // Only notes with images
+	.slice(0, 4);
+---
+
+<!-- Example 1: Basic grid with title and description -->
+<NoteGrid 
+	notes={allNotes}
+	title="All Notes"
+	description="Complete collection of field notes"
+	showTitle={true}
+	showDescription={true}
+	columns={3}
+	variant="default"
+/>
+
+<!-- Example 2: Featured first layout -->
+<NoteGrid 
+	notes={latestNotes}
+	title="Latest Notes"
+	showTitle={true}
+	columns={3}
+	variant="featured-first"
+/>
+
+<!-- Example 3: Compact grid for sidebar -->
+<NoteGrid 
+	notes={latestNotes}
+	columns={1}
+	variant="default"
+	className="sidebar-notes"
+/>
+
+<!-- Example 4: Masonry layout -->
+<NoteGrid 
+	notes={featuredNotes}
+	title="Featured Notes"
+	showTitle={true}
+	columns={4}
+	variant="masonry"
+/>
+
+<!-- Example 5: Individual card usage -->
+<div class="single-card-example">
+	<NoteCard
+		title="Sample Note"
+		description="This is a sample note description that demonstrates the card component."
+		pubDate={new Date()}
+		slug="sample-note"
+		variant="default"
+		showImage={false}
+	/>
+</div>
+
+<!-- Example 6: Compact card for lists -->
+<div class="compact-cards">
+	{latestNotes.map(note => (
+		<NoteCard
+			title={note.data.title}
+			description={note.data.description}
+			pubDate={note.data.pubDate}
+			slug={note.id}
+			heroImage={note.data.heroImage}
+			variant="compact"
+		/>
+	))}
+</div>
+
+<style>
+	.sidebar-notes {
+		max-width: 300px;
+	}
+
+	.single-card-example {
+		max-width: 400px;
+		margin: 2rem auto;
+	}
+
+	.compact-cards {
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		max-width: 600px;
+	}
+</style>
