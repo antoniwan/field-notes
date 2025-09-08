@@ -115,7 +115,7 @@ import { SITE_TITLE } from '../consts';
 		align-items: center;
 		justify-content: space-between;
 		padding: var(--space-4) var(--space-6);
-		max-width: var(--container-2xl);
+		max-width: var(--container-content);
 		margin: 0 auto;
 		position: relative;
 	}
@@ -384,5 +384,29 @@ import { SITE_TITLE } from '../consts';
 		.nav__brand-link {
 			transition: none;
 		}
+	}
+
+	/* Button/CTA link styling for content */
+	.header-link {
+		display: inline-block;
+		padding: var(--space-3) var(--space-6);
+		background: var(--color-accent);
+		color: white;
+		text-decoration: none;
+		border-radius: var(--radius-md);
+		font-weight: 500;
+		transition: all var(--transition-smooth);
+		cursor: pointer;
+	}
+
+	.header-link:hover {
+		background: var(--color-accent-hover);
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-md);
+	}
+
+	.header-link:focus {
+		outline: 2px solid var(--color-accent);
+		outline-offset: 2px;
 	}
 </style>

@@ -225,8 +225,22 @@ const gridConfig = getGridConfig();
 	}
 
 	@media (min-width: 1280px) {
+		.note-grid.grid-cols-3 {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+		}
+
 		.note-grid.grid-cols-4 {
 			grid-template-columns: repeat(4, minmax(0, 1fr));
+		}
+	}
+
+	@media (min-width: 1600px) {
+		.note-grid.grid-cols-3 {
+			grid-template-columns: repeat(5, minmax(0, 1fr));
+		}
+
+		.note-grid.grid-cols-4 {
+			grid-template-columns: repeat(5, minmax(0, 1fr));
 		}
 	}
 

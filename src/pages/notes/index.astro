@@ -10,7 +10,7 @@ const notes = (await getCollection('notes')).sort(
 ---
 
 <PageLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-	<div class="max-w-6xl mx-auto px-6 py-16">
+	<div class="container container-content py-16">
 		<NoteGrid 
 			notes={notes}
 			title="Field Notes"

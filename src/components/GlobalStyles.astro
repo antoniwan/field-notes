@@ -62,16 +62,20 @@
     --max-width-2xl: 1536px;
     --max-width-prose: 65ch;
     
-    /* Standardized Container Widths */
+    /* Standardized Container Widths - Much larger for non-prose content */
     --container-xs: 100%;
     --container-sm: 640px;
     --container-md: 768px;
     --container-lg: 1024px;
     --container-xl: 1280px;
     --container-2xl: 1536px;
-    --container-prose: 65ch;
-    --container-wide: 90vw;
-    --container-narrow: 50ch;
+    --container-3xl: 1920px;    /* New: Extra large for wide layouts */
+    --container-4xl: 2560px;    /* New: Ultra wide for large displays */
+    --container-prose: 65ch;     /* Narrow for reading */
+    --container-wide: 95vw;      /* Increased from 90vw */
+    --container-narrow: 50ch;    /* Very narrow for reading */
+    --container-content: 1400px; /* New: Standard for content grids */
+    --container-hero: 1600px;    /* New: For hero sections */
     
     /* Container Padding */
     --container-padding-sm: var(--space-4);
@@ -318,7 +322,7 @@
 
   /* Layout */
   main {
-    max-width: var(--max-width-prose);
+    max-width: var(--container-content);
     margin: 0 auto;
     padding: var(--space-8) var(--space-4);
   }
@@ -342,9 +346,13 @@
   .container-lg { max-width: var(--container-lg); }
   .container-xl { max-width: var(--container-xl); }
   .container-2xl { max-width: var(--container-2xl); }
+  .container-3xl { max-width: var(--container-3xl); }
+  .container-4xl { max-width: var(--container-4xl); }
   .container-prose { max-width: var(--container-prose); }
   .container-wide { max-width: var(--container-wide); }
   .container-narrow { max-width: var(--container-narrow); }
+  .container-content { max-width: var(--container-content); }
+  .container-hero { max-width: var(--container-hero); }
 
   /* Responsive Container Padding */
   @media (max-width: 768px) {
@@ -358,6 +366,38 @@
     .container {
       padding-left: var(--container-padding-lg);
       padding-right: var(--container-padding-lg);
+    }
+  }
+
+  /* Responsive container behavior for ultra-wide screens */
+  @media (min-width: 1920px) {
+    .container-3xl {
+      max-width: var(--container-3xl);
+    }
+  }
+
+  @media (min-width: 2560px) {
+    .container-4xl {
+      max-width: var(--container-4xl);
+    }
+  }
+
+  /* Container content should be responsive */
+  @media (max-width: 768px) {
+    .container-content {
+      max-width: 100%;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .container-content {
+      max-width: var(--container-lg);
+    }
+  }
+
+  @media (min-width: 1025px) and (max-width: 1400px) {
+    .container-content {
+      max-width: var(--container-xl);
     }
   }
 

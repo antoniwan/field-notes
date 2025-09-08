@@ -155,6 +155,37 @@ A flexible grid component for displaying collections of notes with various layou
 - Subtle shadows and borders
 - Color-coded date information
 
+## Container System
+
+The site uses a standardized container system that provides appropriate widths for different content types:
+
+### Container Classes
+
+| Class | Max Width | Use Case |
+|-------|-----------|----------|
+| `.container-prose` | 65ch | Reading content (blog posts, articles) |
+| `.container-narrow` | 50ch | Very narrow reading (quotes, sidebars) |
+| `.container-content` | 1400px | **Standard for grids and layouts** |
+| `.container-hero` | 1600px | Hero sections and wide layouts |
+| `.container-wide` | 95vw | Full-width with padding |
+| `.container-2xl` | 1536px | Large content areas |
+| `.container-3xl` | 1920px | Ultra-wide displays |
+| `.container-4xl` | 2560px | 4K+ displays |
+
+### Responsive Behavior
+
+- **Mobile (≤768px)**: All containers use full width with appropriate padding
+- **Tablet (769-1024px)**: Content containers scale down appropriately
+- **Desktop (1025px+)**: Full container widths are applied
+- **Ultra-wide (1920px+)**: Larger containers become available
+
+### Usage Guidelines
+
+- **Use `.container-content`** for most non-prose content (grids, cards, layouts)
+- **Use `.container-prose`** for reading content (blog posts, articles)
+- **Use `.container-hero`** for hero sections and wide promotional content
+- **Use `.container-wide`** when you need full viewport width with padding
+
 ## CSS Custom Properties
 
 The components use the following CSS custom properties from the global design system:
