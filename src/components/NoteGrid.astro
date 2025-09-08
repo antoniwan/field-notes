@@ -31,25 +31,22 @@ const {
 // Limit notes if maxItems is specified
 const displayNotes = maxItems ? notes.slice(0, maxItems) : notes;
 
-// Grid configuration based on variant and columns
+// Grid configuration based on variant
 const getGridConfig = () => {
 	if (variant === 'featured-first' && displayNotes.length > 0) {
 		return {
-			gridClass: 'note-grid note-grid--featured-first',
-			columns: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+			gridClass: 'note-grid note-grid--featured-first'
 		};
 	}
 	
 	if (variant === 'masonry') {
 		return {
-			gridClass: 'note-grid note-grid--masonry',
-			columns: `grid-cols-1 md:grid-cols-2 lg:grid-cols-${columns}`
+			gridClass: 'note-grid note-grid--masonry'
 		};
 	}
 	
 	return {
-		gridClass: 'note-grid',
-		columns: `grid-cols-1 md:grid-cols-2 lg:grid-cols-${columns}`
+		gridClass: 'note-grid'
 	};
 };
 
@@ -69,7 +66,7 @@ const gridConfig = getGridConfig();
 			</header>
 		)}
 		
-		<div class={`${gridConfig.gridClass} ${gridConfig.columns}`}>
+		<div class={gridConfig.gridClass}>
 			{displayNotes.map((note, index) => {
 				const isFeatured = variant === 'featured-first' && index === 0;
 				const cardVariant = isFeatured ? 'featured' : 'default';
@@ -130,11 +127,12 @@ const gridConfig = getGridConfig();
 		width: 100%;
 	}
 
-	/* Default grid layout */
+	/* Default grid layout - mobile first */
 	.note-grid {
 		grid-template-columns: repeat(1, minmax(0, 1fr));
 	}
 
+	/* Responsive grid behavior */
 	@media (min-width: 768px) {
 		.note-grid {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -169,7 +167,7 @@ const gridConfig = getGridConfig();
 		grid-template-rows: masonry;
 	}
 
-	/* Responsive column adjustments */
+	/* Grid column classes for specific column counts */
 	.note-grid.grid-cols-1 {
 		grid-template-columns: repeat(1, minmax(0, 1fr));
 	}
@@ -186,10 +184,9 @@ const gridConfig = getGridConfig();
 		grid-template-columns: repeat(4, minmax(0, 1fr));
 	}
 
-	/* Responsive breakpoints */
+	/* Responsive breakpoints for mobile */
 	@media (max-width: 640px) {
 		.note-grid {
-			grid-template-columns: 1fr;
 			gap: var(--space-6);
 		}
 
@@ -199,48 +196,6 @@ const gridConfig = getGridConfig();
 
 		.note-grid__description {
 			font-size: var(--text-base);
-		}
-	}
-
-	@media (min-width: 640px) and (max-width: 768px) {
-		.note-grid.grid-cols-2 {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-		}
-	}
-
-	@media (min-width: 768px) and (max-width: 1024px) {
-		.note-grid.grid-cols-3 {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.note-grid.grid-cols-3 {
-			grid-template-columns: repeat(3, minmax(0, 1fr));
-		}
-
-		.note-grid.grid-cols-4 {
-			grid-template-columns: repeat(3, minmax(0, 1fr));
-		}
-	}
-
-	@media (min-width: 1280px) {
-		.note-grid.grid-cols-3 {
-			grid-template-columns: repeat(4, minmax(0, 1fr));
-		}
-
-		.note-grid.grid-cols-4 {
-			grid-template-columns: repeat(4, minmax(0, 1fr));
-		}
-	}
-
-	@media (min-width: 1600px) {
-		.note-grid.grid-cols-3 {
-			grid-template-columns: repeat(5, minmax(0, 1fr));
-		}
-
-		.note-grid.grid-cols-4 {
-			grid-template-columns: repeat(5, minmax(0, 1fr));
 		}
 	}
 
