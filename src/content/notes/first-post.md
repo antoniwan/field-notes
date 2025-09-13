@@ -4,7 +4,8 @@ description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ei
 pubDate: 'Jul 08 2022'
 heroImage: '../../assets/blog-placeholder-3.jpg'
 readingTime: 5
-category: 'General'
+category: 'self'
+themes: ['identity', 'growth']
 tags: ['lorem', 'ipsum', 'sample', 'test']
 ---
 

@@ -17,15 +17,6 @@ importers:
       '@astrojs/sitemap':
         specifier: ^3.5.1
         version: 3.5.1
-      '@fontsource/inter':
-        specifier: ^5.2.6
-        version: 5.2.6
-      '@fontsource/jetbrains-mono':
-        specifier: ^5.2.6
-        version: 5.2.6
-      '@fontsource/merriweather':
-        specifier: ^5.2.9
-        version: 5.2.9
       astro:
         specifier: ^5.13.5
         version: 5.13.5(@types/node@24.3.1)(rollup@4.50.0)(typescript@5.9.2)
@@ -242,15 +233,6 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
-
-  '@fontsource/inter@5.2.6':
-    resolution: {integrity: sha512-CZs9S1CrjD0jPwsNy9W6j0BhsmRSQrgwlTNkgQXTsAeDRM42LBRLo3eo9gCzfH4GvV7zpyf78Ozfl773826csw==}
-
-  '@fontsource/jetbrains-mono@5.2.6':
-    resolution: {integrity: sha512-nz//dBr99hXZmHp10wgNI00qThWImkzRR5PQjvRM+rpmuHO5rYBJCqPPWufidCvmkkryXx/GOP/lgqsM3R3Org==}
-
-  '@fontsource/merriweather@5.2.9':
-    resolution: {integrity: sha512-amd5Wp7BM5U0HE/FUgsJmf/dvfqSKYf55HrxR1tMlpT3BqQmVZHB9RJDBpNqqf3/yF6fkryCbx5H9fEMa4mY3g==}
 
   '@img/sharp-darwin-arm64@0.33.5':
     resolution: {integrity: sha512-UT4p+iz/2H4twwAoLCqfA9UH5pI6DggwKEGuaPy7nCVQ8ZsiY5PIcrRvD1DzuY3qYL07NtIQcWnBSY/heikIFQ==}
@@ -1981,12 +1963,6 @@ snapshots:
 
   '@esbuild/win32-x64@0.25.9':
     optional: true
-
-  '@fontsource/inter@5.2.6': {}
-
-  '@fontsource/jetbrains-mono@5.2.6': {}
-
-  '@fontsource/merriweather@5.2.9': {}
 
   '@img/sharp-darwin-arm64@0.33.5':
     optionalDependencies:

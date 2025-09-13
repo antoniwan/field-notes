@@ -3,7 +3,8 @@ title: 'Second post'
 description: 'A deeper dive into the complexities of modern web development and design patterns.'
 pubDate: 'Jul 15 2022'
 heroImage: '../../assets/blog-placeholder-4.jpg'
-category: 'Technology'
+category: 'work'
+themes: ['craft', 'systems', 'purpose']
 tags: ['web-development', 'design', 'patterns', 'modern']
 ---
 

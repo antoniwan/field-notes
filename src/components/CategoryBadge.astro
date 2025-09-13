@@ -1,0 +1,114 @@
+---
+import { generateCategoryData, getCategoryIcon, getCategoryColor } from '../utils/categories';
+
+export interface Props {
+  category?: string;
+  size?: 'small' | 'medium' | 'large';
+  showIcon?: boolean;
+  className?: string;
+}
+
+const { 
+  category, 
+  size = 'medium',
+  showIcon = true,
+  className = ''
+} = Astro.props;
+
+// Get category data if category exists
+const categoryData = category ? generateCategoryData(category) : null;
+
+// Size-based styling
+const sizeClasses = {
+  small: {
+    icon: 'text-xs',
+    text: 'text-xs'
+  },
+  medium: {
+    icon: 'text-sm',
+    text: 'text-sm'
+  },
+  large: {
+    icon: 'text-base',
+    text: 'text-base'
+  }
+};
+
+const sizeConfig = sizeClasses[size];
+---
+
+{categoryData && category && (
+  <div class={`category-badge ${size} ${className}`}>
+    {showIcon && (
+      <span 
+        class={`category-icon ${sizeConfig.icon}`}
+        style={`color: ${getCategoryColor(category)}`}
+      >
+        {getCategoryIcon(category)}
+      </span>
+    )}
+    <span 
+      class={`category-name ${sizeConfig.text}`}
+      style={`color: ${getCategoryColor(category)}`}
+    >
+      {categoryData.displayName}
+    </span>
+  </div>
+)}
+
+<style>
+  .category-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-weight: 500;
+    opacity: 0.8;
+  }
+
+  .category-icon {
+    font-weight: 400;
+    flex-shrink: 0;
+  }
+
+  .category-name {
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  /* Size variants - simplified */
+  .category-badge.small {
+    gap: var(--space-1);
+  }
+
+  .category-badge.small .category-icon {
+    font-size: var(--text-xs);
+  }
+
+  .category-badge.small .category-name {
+    font-size: var(--text-xs);
+  }
+
+  .category-badge.medium {
+    gap: var(--space-1);
+  }
+
+  .category-badge.medium .category-icon {
+    font-size: var(--text-sm);
+  }
+
+  .category-badge.medium .category-name {
+    font-size: var(--text-sm);
+  }
+
+  .category-badge.large {
+    gap: var(--space-2);
+  }
+
+  .category-badge.large .category-icon {
+    font-size: var(--text-base);
+  }
+
+  .category-badge.large .category-name {
+    font-size: var(--text-base);
+  }
+</style>

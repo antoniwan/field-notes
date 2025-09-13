@@ -1,5 +1,6 @@
 ---
 import FormattedDate from './FormattedDate.astro';
+import CategoryBadge from './CategoryBadge.astro';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
@@ -26,6 +27,9 @@ const {
 <aside class="post-sidebar">
 	<!-- Mobile: Title is always visible at top -->
 	<div class="sidebar-title-mobile">
+		{category && (
+			<CategoryBadge category={category} size="medium" className="category-display-mobile" />
+		)}
 		<h1 class="note-title">{title}</h1>
 		{description && (
 			<p class="note-description">{description}</p>
@@ -35,6 +39,9 @@ const {
 	<!-- Desktop: Full sidebar content -->
 	<div class="sidebar-content">
 		<div class="sidebar-title-desktop">
+			{category && (
+				<CategoryBadge category={category} size="large" className="category-display-desktop" />
+			)}
 			<h1 class="note-title">{title}</h1>
 			{description && (
 				<p class="note-description">{description}</p>
@@ -56,15 +63,6 @@ const {
 				</div>
 			)}
 
-			{category && (
-				<div class="metadata-item">
-					<h3 class="metadata-label">Category</h3>
-					<span class="metadata-value category-value">
-						<span class="category-icon">📁</span>
-						{category}
-					</span>
-				</div>
-			)}
 
 			{tags.length > 0 && (
 				<div class="metadata-item">
@@ -112,6 +110,14 @@ const {
 		color: var(--color-secondary);
 		margin: 0;
 		font-style: italic;
+	}
+
+	.category-display-mobile {
+		margin-bottom: var(--space-3);
+	}
+
+	.category-display-desktop {
+		margin-bottom: var(--space-4);
 	}
 
 	.sidebar-metadata {
@@ -208,6 +214,7 @@ const {
 		.note-description {
 			font-size: var(--text-lg);
 		}
+
 	}
 
 	/* Tablet styles - also hide sidebar for better reading experience */
@@ -254,4 +261,5 @@ const {
 		background: var(--color-accent);
 		color: var(--color-background);
 	}
+
 </style>
