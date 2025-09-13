@@ -1,6 +1,7 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import NoteGrid from '../components/NoteGrid.astro';
+import HeroSection from '../components/HeroSection.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 import { getCollection } from 'astro:content';
 
@@ -12,15 +13,10 @@ const latestNotes = allNotes
 ---
 
 <PageLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-	<!-- Hero Section -->
-	<section class="hero-section">
-		<div class="hero-content">
-			<h1 class="hero-title">{SITE_TITLE}</h1>
-			<p class="hero-subtitle">
-				Observations on the human experience in our digital age.
-			</p>
-		</div>
-	</section>
+	<HeroSection 
+		title={SITE_TITLE}
+		subtitle="Observations on the human experience in our digital age."
+	/>
 	
 	<!-- Main Content -->
 	<main class="main-content">
@@ -47,46 +43,6 @@ const latestNotes = allNotes
 </PageLayout>
 
 <style>
-	/* Hero Section */
-	.hero-section {
-		background: linear-gradient(135deg, var(--color-background) 0%, var(--color-background-subtle) 100%);
-		padding: var(--space-32) 0 var(--space-24);
-		text-align: center;
-		border-bottom: 1px solid var(--color-border-light);
-		position: relative;
-		overflow: hidden;
-	}
-
-	.hero-content {
-		max-width: var(--container-prose);
-		margin: 0 auto;
-		padding: 0 var(--space-6);
-	}
-
-	.hero-title {
-		font-family: var(--font-serif);
-		font-size: var(--text-6xl);
-		font-weight: 300;
-		line-height: var(--leading-tight);
-		color: var(--color-primary);
-		margin: 0 0 var(--space-8) 0;
-		letter-spacing: -0.03em;
-		position: relative;
-		animation: fadeInUp 0.8s ease-out;
-	}
-
-	.hero-subtitle {
-		font-size: var(--text-xl);
-		line-height: var(--leading-relaxed);
-		color: var(--color-secondary);
-		margin: 0;
-		max-width: 600px;
-		margin-left: auto;
-		margin-right: auto;
-		font-weight: 400;
-		opacity: 0.9;
-		animation: fadeInUp 0.8s ease-out 0.2s both;
-	}
 
 	/* Main Content */
 	.main-content {
@@ -134,14 +90,6 @@ const latestNotes = allNotes
 
 	/* Responsive Design */
 	@media (max-width: 1024px) {
-		.hero-section {
-			padding: var(--space-24) 0 var(--space-20);
-		}
-
-		.hero-title {
-			font-size: var(--text-5xl);
-		}
-
 		.main-content {
 			padding: var(--space-20) var(--space-6);
 		}
@@ -156,23 +104,6 @@ const latestNotes = allNotes
 	}
 
 	@media (max-width: 768px) {
-		.hero-section {
-			padding: var(--space-20) 0 var(--space-16);
-		}
-
-		.hero-content {
-			padding: 0 var(--space-4);
-		}
-
-		.hero-title {
-			font-size: var(--text-4xl);
-			margin-bottom: var(--space-6);
-		}
-
-		.hero-subtitle {
-			font-size: var(--text-lg);
-		}
-
 		.main-content {
 			padding: var(--space-16) var(--space-4);
 		}
@@ -191,19 +122,6 @@ const latestNotes = allNotes
 	}
 
 	@media (max-width: 480px) {
-		.hero-section {
-			padding: var(--space-16) 0 var(--space-12);
-		}
-
-		.hero-title {
-			font-size: var(--text-3xl);
-			margin-bottom: var(--space-4);
-		}
-
-		.hero-subtitle {
-			font-size: var(--text-base);
-		}
-
 		.main-content {
 			padding: var(--space-12) var(--space-3);
 		}
@@ -218,44 +136,11 @@ const latestNotes = allNotes
 	}
 
 	/* Dark mode support */
-	[data-theme="dark"] .hero-section {
-		background: var(--color-background);
-		border-bottom-color: var(--color-border);
-	}
-
-	[data-theme="dark"] .hero-title {
-		color: var(--color-primary);
-	}
-
-	[data-theme="dark"] .hero-subtitle {
-		color: var(--color-secondary);
-	}
-
 	[data-theme="dark"] .section-title {
 		color: var(--color-primary);
 	}
 
 	[data-theme="dark"] .section-description {
 		color: var(--color-secondary);
-	}
-
-	/* Animations */
-	@keyframes fadeInUp {
-		from {
-			opacity: 0;
-			transform: translateY(30px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	/* Reduced motion support */
-	@media (prefers-reduced-motion: reduce) {
-		.hero-title,
-		.hero-subtitle {
-			animation: none;
-		}
 	}
 </style>
