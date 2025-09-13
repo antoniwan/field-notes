@@ -3,6 +3,7 @@ import BaseLayout from './BaseLayout.astro';
 import { Image } from 'astro:assets';
 import FormattedDate from '../components/FormattedDate.astro';
 import ArticleFooter from '../components/ArticleFooter.astro';
+import Prose from '../components/Prose.astro';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
@@ -35,7 +36,7 @@ const {
 >
 	<!-- Hero Section -->
 	<section class="hero-section">
-		<div class="hero-content">
+		<div class="container-content">
 			{heroImage && (
 				<div class="hero-image">
 					<Image 
@@ -64,9 +65,9 @@ const {
 	<!-- Main Content -->
 	<main class="main-content">
 		<article class="content-article">
-			<div class="prose prose-lg max-w-none">
+			<Prose size="lg">
 				<slot />
-			</div>
+			</Prose>
 		</article>
 	</main>
 	
@@ -83,11 +84,7 @@ const {
 		border-bottom: 1px solid var(--color-border-light);
 	}
 
-	.hero-content {
-		max-width: var(--container-prose);
-		margin: 0 auto;
-		padding: 0 var(--space-6);
-	}
+	/* Hero content is now handled by container-content class */
 
 	.hero-image {
 		margin-bottom: var(--space-12);
@@ -143,9 +140,8 @@ const {
 
 	/* Main Content */
 	.main-content {
-		max-width: var(--container-prose);
-		margin: 0 auto;
-		padding: var(--space-20) var(--space-6);
+		width: 100%;
+		padding: var(--space-20) 0;
 	}
 
 	.content-article {
@@ -164,7 +160,7 @@ const {
 		}
 
 		.main-content {
-			padding: var(--space-16) var(--space-6);
+			padding: var(--space-16) 0;
 		}
 	}
 
@@ -173,9 +169,7 @@ const {
 			padding: var(--space-16) 0 var(--space-12);
 		}
 
-		.hero-content {
-			padding: 0 var(--space-4);
-		}
+		/* Hero content padding is now handled by container-content responsive styles */
 
 		.hero-title {
 			font-size: var(--text-3xl);
@@ -188,7 +182,7 @@ const {
 		}
 
 		.main-content {
-			padding: var(--space-12) var(--space-4);
+			padding: var(--space-12) 0;
 		}
 
 	}
@@ -209,7 +203,7 @@ const {
 		}
 
 		.main-content {
-			padding: var(--space-8) var(--space-3);
+			padding: var(--space-8) 0;
 		}
 
 	}
@@ -233,157 +227,6 @@ const {
 	}
 
 
-	/* Prose content styling */
-	.prose {
-		line-height: var(--leading-relaxed);
-		color: var(--color-primary);
-	}
-
-	.prose h1,
-	.prose h2,
-	.prose h3,
-	.prose h4,
-	.prose h5,
-	.prose h6 {
-		margin-top: var(--space-12);
-		margin-bottom: var(--space-4);
-		color: var(--color-primary);
-		font-weight: 700;
-		line-height: var(--leading-tight);
-	}
-
-	.prose h1:first-child,
-	.prose h2:first-child,
-	.prose h3:first-child,
-	.prose h4:first-child,
-	.prose h5:first-child,
-	.prose h6:first-child {
-		margin-top: 0;
-	}
-
-	.prose h1 {
-		font-size: var(--text-3xl);
-	}
-
-	.prose h2 {
-		font-size: var(--text-2xl);
-	}
-
-	.prose h3 {
-		font-size: var(--text-xl);
-	}
-
-	.prose h4 {
-		font-size: var(--text-lg);
-	}
-
-	.prose p {
-		margin-bottom: var(--space-6);
-		line-height: var(--leading-relaxed);
-	}
-
-	.prose ul,
-	.prose ol {
-		margin-bottom: var(--space-6);
-		padding-left: var(--space-6);
-	}
-
-	.prose li {
-		margin-bottom: var(--space-2);
-		line-height: var(--leading-relaxed);
-	}
-
-	.prose blockquote {
-		margin: var(--space-8) 0;
-		padding: var(--space-6);
-		background: var(--color-background-subtle);
-		border-left: 4px solid var(--color-accent);
-		border-radius: 0;
-		font-style: italic;
-		color: var(--color-secondary);
-	}
-
-	.prose code {
-		background: var(--color-background-subtle);
-		padding: var(--space-1) var(--space-2);
-		border-radius: 0;
-		font-size: 0.875em;
-		border: 1px solid var(--color-border-light);
-	}
-
-	.prose pre {
-		background: var(--color-background-subtle);
-		padding: var(--space-6);
-		border-radius: 0;
-		overflow-x: auto;
-		margin: var(--space-6) 0;
-		border: 1px solid var(--color-border-light);
-	}
-
-	.prose pre code {
-		background: none;
-		padding: 0;
-		border: none;
-	}
-
-	.prose img {
-		max-width: 100%;
-		height: auto;
-		border-radius: 0;
-		margin: var(--space-6) 0;
-		box-shadow: var(--shadow-md);
-	}
-
-	.prose table {
-		width: 100%;
-		border-collapse: collapse;
-		margin: var(--space-6) 0;
-		font-size: var(--text-sm);
-	}
-
-	.prose th,
-	.prose td {
-		padding: var(--space-3) var(--space-4);
-		text-align: left;
-		border-bottom: 1px solid var(--color-border);
-	}
-
-	.prose th {
-		font-weight: 700;
-		background: var(--color-background-subtle);
-		color: var(--color-primary);
-	}
-
-	.prose hr {
-		margin: var(--space-12) 0;
-		border: none;
-		height: 1px;
-		background: var(--color-border);
-	}
-
-	/* Responsive adjustments */
-	@media (max-width: 768px) {
-		.prose h1 {
-			font-size: var(--text-2xl);
-		}
-
-		.prose h2 {
-			font-size: var(--text-xl);
-		}
-
-		.prose h3 {
-			font-size: var(--text-lg);
-		}
-	}
-
-	@media (max-width: 480px) {
-		.prose h1 {
-			font-size: var(--text-xl);
-		}
-
-		.prose h2 {
-			font-size: var(--text-lg);
-		}
-	}
+	/* Prose content styling is now handled by the Prose component */
 
 </style>

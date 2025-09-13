@@ -1,6 +1,7 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import HeroSection from '../components/HeroSection.astro';
+import Prose from '../components/Prose.astro';
 ---
 
 <PageLayout
@@ -15,54 +16,44 @@ import HeroSection from '../components/HeroSection.astro';
 	<!-- Main Content -->
 	<main class="main-content">
 		<article class="content-article">
-			<section class="content-section">
-				<h2 class="section-title">What is Field Notes on Modern Humanity?</h2>
-				<p class="section-text">
+			<Prose size="lg">
+				<h2>What is Field Notes on Modern Humanity?</h2>
+				<p>
 					Field Notes on Modern Humanity is a digital space dedicated to thoughtful exploration of the human experience in our rapidly evolving digital age. Through observations, insights, and reflections, we examine how technology, culture, and society intersect with what it means to be human today.
 				</p>
-			</section>
 
-			<section class="content-section">
-				<h2 class="section-title">Our Mission</h2>
-				<p class="section-text">
+				<h2>Our Mission</h2>
+				<p>
 					In a world increasingly shaped by algorithms, artificial intelligence, and digital connections, we believe it's more important than ever to maintain our humanity. Our mission is to create a space for deep thinking about the questions that matter most: How do we maintain authentic connections in a digital world? What does it mean to be human when machines can think? How do we preserve our values and ethics in an age of rapid technological change?
 				</p>
-			</section>
 
-			<section class="content-section">
-				<h2 class="section-title">What You'll Find Here</h2>
-				<p class="section-text">
+				<h2>What You'll Find Here</h2>
+				<p>
 					Our content spans a wide range of topics, all viewed through the lens of human experience:
 				</p>
-				<ul class="content-list">
+				<ul>
 					<li><strong>Digital Culture:</strong> How technology shapes our relationships, work, and daily lives</li>
 					<li><strong>Human Psychology:</strong> The intersection of technology and human behavior</li>
 					<li><strong>Ethics & Values:</strong> Moral considerations in our digital age</li>
 					<li><strong>Society & Community:</strong> Building meaningful connections in a connected world</li>
 					<li><strong>Future Thinking:</strong> Preparing for what comes next while staying grounded in what makes us human</li>
 				</ul>
-			</section>
 
-			<section class="content-section">
-				<h2 class="section-title">Our Approach</h2>
-				<p class="section-text">
+				<h2>Our Approach</h2>
+				<p>
 					We believe in thoughtful, well-researched content that doesn't rush to conclusions. Each piece is crafted with care, considering multiple perspectives and avoiding the quick takes that dominate much of digital discourse. We're not here to predict the future or provide easy answers, but rather to ask the right questions and explore the complexities of modern life.
 				</p>
-			</section>
 
-			<section class="content-section">
-				<h2 class="section-title">Open Source & Transparent</h2>
-				<p class="section-text">
+				<h2>Open Source & Transparent</h2>
+				<p>
 					This site is built with open source tools and is itself open source. We believe in transparency and community contribution. The code is available on <a href="https://github.com/withastro/astro" target="_blank" rel="noopener">GitHub</a>, and we welcome contributions, suggestions, and discussions about both the content and the technology that powers it.
 				</p>
-			</section>
 
-			<section class="content-section">
-				<h2 class="section-title">Get in Touch</h2>
-				<p class="section-text">
+				<h2>Get in Touch</h2>
+				<p>
 					We'd love to hear from you. Whether you have thoughts on our content, suggestions for topics to explore, or just want to share your own observations about modern humanity, we're here to listen. You can find us on social media or reach out through our contact channels.
 				</p>
-			</section>
+			</Prose>
 		</article>
 	</main>
 </PageLayout>
@@ -71,9 +62,8 @@ import HeroSection from '../components/HeroSection.astro';
 
 	/* Main Content */
 	.main-content {
-		max-width: var(--container-prose);
-		margin: 0 auto;
-		padding: var(--space-24) var(--space-6);
+		width: 100%;
+		padding: var(--space-24) 0;
 		background: var(--color-background);
 	}
 
@@ -81,108 +71,32 @@ import HeroSection from '../components/HeroSection.astro';
 		width: 100%;
 	}
 
-	.content-section {
-		margin-bottom: var(--space-16);
-	}
-
-	.content-section:last-child {
-		margin-bottom: 0;
-	}
-
-	.section-title {
-		font-family: var(--font-serif);
-		font-size: var(--text-3xl);
-		font-weight: 300;
-		line-height: var(--leading-tight);
-		color: var(--color-primary);
-		margin: 0 0 var(--space-6) 0;
-		letter-spacing: -0.02em;
-	}
-
-	.section-text {
-		font-size: var(--text-lg);
-		line-height: var(--leading-relaxed);
-		color: var(--color-primary);
-		margin: 0 0 var(--space-6) 0;
-	}
-
-	.content-list {
-		margin: var(--space-6) 0;
-		padding-left: var(--space-6);
-	}
-
-	.content-list li {
-		font-size: var(--text-lg);
-		line-height: var(--leading-relaxed);
-		color: var(--color-primary);
-		margin-bottom: var(--space-4);
-	}
-
-	.content-list li:last-child {
-		margin-bottom: 0;
-	}
+	/* Content styling is now handled by the Prose component */
 
 	/* Responsive Design */
 	@media (max-width: 1024px) {
 		.main-content {
-			padding: var(--space-16) var(--space-6);
+			padding: var(--space-16) 0;
 		}
 
-		.content-section {
-			margin-bottom: var(--space-12);
-		}
+		/* Content section styling is now handled by the Prose component */
 	}
 
 	@media (max-width: 768px) {
 		.main-content {
-			padding: var(--space-12) var(--space-4);
+			padding: var(--space-12) 0;
 		}
 
-		.section-title {
-			font-size: var(--text-xl);
-		}
-
-		.section-text {
-			font-size: var(--text-base);
-		}
-
-		.content-list li {
-			font-size: var(--text-base);
-		}
-
-		.content-section {
-			margin-bottom: var(--space-8);
-		}
+		/* Typography styling is now handled by the Prose component */
 	}
 
 	@media (max-width: 480px) {
 		.main-content {
-			padding: var(--space-8) var(--space-3);
+			padding: var(--space-8) 0;
 		}
 
-		.section-title {
-			font-size: var(--text-lg);
-		}
-
-		.section-text {
-			font-size: var(--text-sm);
-		}
-
-		.content-list li {
-			font-size: var(--text-sm);
-		}
+		/* Typography styling is now handled by the Prose component */
 	}
 
-	/* Dark mode support */
-	[data-theme="dark"] .section-title {
-		color: var(--color-primary);
-	}
-
-	[data-theme="dark"] .section-text {
-		color: var(--color-primary);
-	}
-
-	[data-theme="dark"] .content-list li {
-		color: var(--color-primary);
-	}
+	/* Dark mode support is now handled by the Prose component */
 </style>
