@@ -21,13 +21,12 @@ A flexible card component for displaying individual notes with multiple variants
 | `heroImage` | `ImageMetadata` | - | Hero image (optional) |
 | `updatedDate` | `Date` | - | Last updated date (optional) |
 | `showImage` | `boolean` | `true` | Whether to show the hero image |
-| `variant` | `'default' \| 'compact' \| 'featured'` | `'default'` | Card display variant |
+| `variant` | `'default' \| 'featured'` | `'default'` | Card display variant |
 | `className` | `string` | `''` | Additional CSS classes |
 
 #### Variants
 
 - **default**: Standard card with image, title, description, and date
-- **compact**: Horizontal layout optimized for lists and sidebars
 - **featured**: Larger card that spans multiple grid columns
 
 #### Usage Examples
@@ -40,15 +39,6 @@ A flexible card component for displaying individual notes with multiple variants
 	pubDate={new Date()}
 	slug="my-note"
 	heroImage={imageData}
-/>
-
-<!-- Compact variant -->
-<NoteCard
-	title="Compact Note"
-	description="Short description"
-	pubDate={new Date()}
-	slug="compact-note"
-	variant="compact"
 />
 
 <!-- Featured variant -->
@@ -281,4 +271,4 @@ All components use CSS custom properties, making it easy to customize:
 
 ## Examples
 
-See `src/components/NoteGridExamples.astro` for comprehensive usage examples and patterns.
+See the homepage (`src/pages/index.astro`) and notes index (`src/pages/notes/index.astro`) for usage examples.

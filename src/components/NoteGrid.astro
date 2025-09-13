@@ -170,22 +170,6 @@ const gridConfig = getGridConfig();
 		grid-template-rows: masonry;
 	}
 
-	/* Grid column classes for specific column counts */
-	.note-grid.grid-cols-1 {
-		grid-template-columns: repeat(1, minmax(0, 1fr));
-	}
-
-	.note-grid.grid-cols-2 {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-	}
-
-	.note-grid.grid-cols-3 {
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-	}
-
-	.note-grid.grid-cols-4 {
-		grid-template-columns: repeat(4, minmax(0, 1fr));
-	}
 
 	/* Responsive breakpoints for mobile */
 	@media (max-width: 640px) {
@@ -267,12 +251,12 @@ const gridConfig = getGridConfig();
 	}
 
 	/* Dark mode high contrast support */
-	[data-theme="dark"] @media (prefers-contrast: high) {
-		.note-grid__title {
+	@media (prefers-contrast: high) {
+		[data-theme="dark"] .note-grid__title {
 			color: var(--color-primary);
 		}
 
-		.note-grid__description {
+		[data-theme="dark"] .note-grid__description {
 			color: var(--color-secondary);
 		}
 	}

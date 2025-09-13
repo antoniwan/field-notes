@@ -462,8 +462,8 @@ import ThemeToggle from './ThemeToggle.astro';
 	}
 
 	/* Dark mode high contrast support */
-	[data-theme="dark"] @media (prefers-contrast: high) {
-		.header {
+	@media (prefers-contrast: high) {
+		[data-theme="dark"] .header {
 			background: var(--color-background);
 			border-bottom: 2px solid var(--color-primary);
 		}
@@ -479,27 +479,4 @@ import ThemeToggle from './ThemeToggle.astro';
 		}
 	}
 
-	/* Button/CTA link styling for content */
-	.header-link {
-		display: inline-block;
-		padding: var(--space-3) var(--space-6);
-		background: var(--color-accent);
-		color: white;
-		text-decoration: none;
-		border-radius: 0;
-		font-weight: 500;
-		transition: all var(--transition-smooth);
-		cursor: pointer;
-	}
-
-	.header-link:hover {
-		background: var(--color-accent-hover);
-		transform: translateY(-2px);
-		box-shadow: var(--shadow-md);
-	}
-
-	.header-link:focus {
-		outline: 2px solid var(--color-accent);
-		outline-offset: 2px;
-	}
 </style>

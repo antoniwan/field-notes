@@ -11,7 +11,7 @@ interface Props {
 	heroImage?: ImageMetadata;
 	updatedDate?: Date;
 	showImage?: boolean;
-	variant?: 'default' | 'compact' | 'featured';
+	variant?: 'default' | 'featured';
 	className?: string;
 }
 
@@ -29,13 +29,11 @@ const {
 
 const cardClasses = {
 	default: 'note-card',
-	compact: 'note-card note-card--compact',
 	featured: 'note-card note-card--featured'
 };
 
 const imageSizes = {
 	default: { width: 120, height: 80 },
-	compact: { width: 120, height: 80 },
 	featured: { width: 160, height: 100 }
 };
 
@@ -224,10 +222,6 @@ const imageSize = imageSizes[variant];
 		font-style: italic;
 	}
 
-	/* Compact variant - now same as default */
-	.note-card--compact {
-		/* Same as default layout */
-	}
 
 	/* Featured variant */
 	.note-card--featured {
