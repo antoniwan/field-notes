@@ -32,37 +32,274 @@ const {
 	canonical={canonical}
 	noindex={noindex}
 >
-	<article class="container container-prose">
-		{heroImage && (
-			<div class="mb-12 rounded-xl overflow-hidden shadow-lg">
-				<Image 
-					width={720} 
-					height={360} 
-					src={heroImage} 
-					alt={title}
-					class="w-full h-auto block"
-				/>
-			</div>
-		)}
-		<header class="text-center mb-12 pb-8 border-b border-border">
-			<h1 class="text-4xl font-bold text-primary mb-4 font-serif">{title}</h1>
-			{description && (
-				<p class="text-lg text-secondary mb-6 italic leading-relaxed">{description}</p>
+	<!-- Hero Section -->
+	<section class="hero-section">
+		<div class="hero-content">
+			{heroImage && (
+				<div class="hero-image">
+					<Image 
+						width={720} 
+						height={360} 
+						src={heroImage} 
+						alt={title}
+						class="hero-img"
+					/>
+				</div>
 			)}
-			<time class="text-sm font-medium text-muted uppercase tracking-wider" datetime={pubDate.toISOString()}>
-				<FormattedDate date={pubDate} />
-			</time>
-		</header>
-		<div class="prose">
-			<slot />
+			<header class="hero-header">
+				<h1 class="hero-title">{title}</h1>
+				{description && (
+					<p class="hero-description">{description}</p>
+				)}
+				<div class="hero-meta">
+					<time datetime={pubDate.toISOString()}>
+						<FormattedDate date={pubDate} />
+					</time>
+				</div>
+			</header>
 		</div>
-		<footer class="mt-16 pt-8 border-t border-border text-center">
+	</section>
+	
+	<!-- Main Content -->
+	<main class="main-content">
+		<article class="content-article">
+			<div class="prose prose-lg max-w-none">
+				<slot />
+			</div>
+		</article>
+	</main>
+	
+	<!-- Footer -->
+	<footer class="article-footer">
+		<div class="footer-content">
 			<a href="/notes/" class="back-link">← Back to Notes</a>
-		</footer>
-	</article>
+		</div>
+	</footer>
 </BaseLayout>
 
 <style>
+	/* Hero Section */
+	.hero-section {
+		background: var(--color-background);
+		padding: var(--space-24) 0 var(--space-20);
+		text-align: center;
+		border-bottom: 1px solid var(--color-border-light);
+	}
+
+	.hero-content {
+		max-width: var(--container-prose);
+		margin: 0 auto;
+		padding: 0 var(--space-6);
+	}
+
+	.hero-image {
+		margin-bottom: var(--space-12);
+		overflow: hidden;
+		box-shadow: var(--shadow-lg);
+	}
+
+	.hero-img {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	.hero-header {
+		text-align: center;
+	}
+
+	.hero-title {
+		font-family: var(--font-serif);
+		font-size: var(--text-5xl);
+		font-weight: 700;
+		line-height: var(--leading-tight);
+		color: var(--color-primary);
+		margin: 0 0 var(--space-6) 0;
+		letter-spacing: -0.02em;
+	}
+
+	.hero-description {
+		font-size: var(--text-xl);
+		line-height: var(--leading-relaxed);
+		color: var(--color-secondary);
+		margin: 0 0 var(--space-8) 0;
+		font-style: italic;
+		max-width: 600px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	.hero-meta {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.hero-meta time {
+		font-size: var(--text-sm);
+		font-weight: 500;
+		color: var(--color-muted);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	/* Main Content */
+	.main-content {
+		max-width: var(--container-prose);
+		margin: 0 auto;
+		padding: var(--space-20) var(--space-6);
+	}
+
+	.content-article {
+		width: 100%;
+	}
+
+	/* Article Footer */
+	.article-footer {
+		background: var(--color-background-subtle);
+		padding: var(--space-16) 0;
+		border-top: 1px solid var(--color-border-light);
+	}
+
+	.footer-content {
+		max-width: var(--container-prose);
+		margin: 0 auto;
+		padding: 0 var(--space-6);
+		text-align: center;
+	}
+
+	.back-link {
+		display: inline-block;
+		font-weight: 600;
+		font-size: var(--text-sm);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		transition: all var(--transition-smooth);
+		padding: var(--space-3) var(--space-6);
+		border: 1px solid var(--color-border);
+		border-radius: 0;
+		background-color: var(--color-background);
+		text-decoration: none;
+		transform: translateY(0);
+	}
+
+	.back-link:hover {
+		background-color: var(--color-accent);
+		color: white;
+		border-color: var(--color-accent);
+		transform: translateY(-2px);
+		box-shadow: var(--shadow-md);
+	}
+
+	/* Responsive Design */
+	@media (max-width: 1024px) {
+		.hero-section {
+			padding: var(--space-20) 0 var(--space-16);
+		}
+
+		.hero-title {
+			font-size: var(--text-4xl);
+		}
+
+		.main-content {
+			padding: var(--space-16) var(--space-6);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.hero-section {
+			padding: var(--space-16) 0 var(--space-12);
+		}
+
+		.hero-content {
+			padding: 0 var(--space-4);
+		}
+
+		.hero-title {
+			font-size: var(--text-3xl);
+			margin-bottom: var(--space-4);
+		}
+
+		.hero-description {
+			font-size: var(--text-lg);
+			margin-bottom: var(--space-6);
+		}
+
+		.main-content {
+			padding: var(--space-12) var(--space-4);
+		}
+
+		.article-footer {
+			padding: var(--space-12) 0;
+		}
+
+		.footer-content {
+			padding: 0 var(--space-4);
+		}
+	}
+
+	@media (max-width: 480px) {
+		.hero-section {
+			padding: var(--space-12) 0 var(--space-8);
+		}
+
+		.hero-title {
+			font-size: var(--text-2xl);
+			margin-bottom: var(--space-3);
+		}
+
+		.hero-description {
+			font-size: var(--text-base);
+			margin-bottom: var(--space-4);
+		}
+
+		.main-content {
+			padding: var(--space-8) var(--space-3);
+		}
+
+		.article-footer {
+			padding: var(--space-8) 0;
+		}
+
+		.footer-content {
+			padding: 0 var(--space-3);
+		}
+	}
+
+	/* Dark mode support */
+	[data-theme="dark"] .hero-section {
+		background: var(--color-background);
+		border-bottom-color: var(--color-border);
+	}
+
+	[data-theme="dark"] .hero-title {
+		color: var(--color-primary);
+	}
+
+	[data-theme="dark"] .hero-description {
+		color: var(--color-secondary);
+	}
+
+	[data-theme="dark"] .hero-meta time {
+		color: var(--color-muted);
+	}
+
+	[data-theme="dark"] .article-footer {
+		background: var(--color-background-subtle);
+		border-top-color: var(--color-border);
+	}
+
+	[data-theme="dark"] .back-link {
+		background-color: var(--color-background);
+		border-color: var(--color-border);
+		color: var(--color-primary);
+	}
+
+	[data-theme="dark"] .back-link:hover {
+		background-color: var(--color-accent);
+		border-color: var(--color-accent);
+	}
+
 	/* Prose content styling */
 	.prose {
 		line-height: var(--leading-relaxed);
@@ -128,7 +365,7 @@ const {
 		padding: var(--space-6);
 		background: var(--color-background-subtle);
 		border-left: 4px solid var(--color-accent);
-		border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+		border-radius: 0;
 		font-style: italic;
 		color: var(--color-secondary);
 	}
@@ -136,7 +373,7 @@ const {
 	.prose code {
 		background: var(--color-background-subtle);
 		padding: var(--space-1) var(--space-2);
-		border-radius: var(--radius-sm);
+		border-radius: 0;
 		font-size: 0.875em;
 		border: 1px solid var(--color-border-light);
 	}
@@ -144,7 +381,7 @@ const {
 	.prose pre {
 		background: var(--color-background-subtle);
 		padding: var(--space-6);
-		border-radius: var(--radius-lg);
+		border-radius: 0;
 		overflow-x: auto;
 		margin: var(--space-6) 0;
 		border: 1px solid var(--color-border-light);
@@ -159,7 +396,7 @@ const {
 	.prose img {
 		max-width: 100%;
 		height: auto;
-		border-radius: var(--radius-lg);
+		border-radius: 0;
 		margin: var(--space-6) 0;
 		box-shadow: var(--shadow-md);
 	}
@@ -229,7 +466,7 @@ const {
 		transition: all var(--transition-smooth);
 		padding: var(--space-3) var(--space-6);
 		border: 1px solid var(--color-border);
-		border-radius: var(--radius-lg);
+		border-radius: 0;
 		background-color: var(--color-background);
 		text-decoration: none;
 		transform: translateY(0);

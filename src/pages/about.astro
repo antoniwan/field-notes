@@ -6,40 +6,269 @@ import PageLayout from '../layouts/PageLayout.astro';
 	title="About Field Notes on Modern Humanity"
 	description="Learn about Field Notes on Modern Humanity, a thoughtful exploration of the human experience in our digital age through observations, insights, and reflections."
 >
-	<h2>What is Field Notes on Modern Humanity?</h2>
-	<p>
-		Field Notes on Modern Humanity is a digital space dedicated to thoughtful exploration of the human experience in our rapidly evolving digital age. Through observations, insights, and reflections, we examine how technology, culture, and society intersect with what it means to be human today.
-	</p>
+	<!-- Hero Section -->
+	<section class="hero-section">
+		<div class="hero-content">
+			<h1 class="hero-title">About Field Notes on Modern Humanity</h1>
+			<p class="hero-subtitle">
+				A thoughtful exploration of the human experience in our digital age
+			</p>
+		</div>
+	</section>
+	
+	<!-- Main Content -->
+	<main class="main-content">
+		<article class="content-article">
+			<section class="content-section">
+				<h2 class="section-title">What is Field Notes on Modern Humanity?</h2>
+				<p class="section-text">
+					Field Notes on Modern Humanity is a digital space dedicated to thoughtful exploration of the human experience in our rapidly evolving digital age. Through observations, insights, and reflections, we examine how technology, culture, and society intersect with what it means to be human today.
+				</p>
+			</section>
 
-	<h2>Our Mission</h2>
-	<p>
-		In a world increasingly shaped by algorithms, artificial intelligence, and digital connections, we believe it's more important than ever to maintain our humanity. Our mission is to create a space for deep thinking about the questions that matter most: How do we maintain authentic connections in a digital world? What does it mean to be human when machines can think? How do we preserve our values and ethics in an age of rapid technological change?
-	</p>
+			<section class="content-section">
+				<h2 class="section-title">Our Mission</h2>
+				<p class="section-text">
+					In a world increasingly shaped by algorithms, artificial intelligence, and digital connections, we believe it's more important than ever to maintain our humanity. Our mission is to create a space for deep thinking about the questions that matter most: How do we maintain authentic connections in a digital world? What does it mean to be human when machines can think? How do we preserve our values and ethics in an age of rapid technological change?
+				</p>
+			</section>
 
-	<h2>What You'll Find Here</h2>
-	<p>
-		Our content spans a wide range of topics, all viewed through the lens of human experience:
-	</p>
-	<ul>
-		<li><strong>Digital Culture:</strong> How technology shapes our relationships, work, and daily lives</li>
-		<li><strong>Human Psychology:</strong> The intersection of technology and human behavior</li>
-		<li><strong>Ethics & Values:</strong> Moral considerations in our digital age</li>
-		<li><strong>Society & Community:</strong> Building meaningful connections in a connected world</li>
-		<li><strong>Future Thinking:</strong> Preparing for what comes next while staying grounded in what makes us human</li>
-	</ul>
+			<section class="content-section">
+				<h2 class="section-title">What You'll Find Here</h2>
+				<p class="section-text">
+					Our content spans a wide range of topics, all viewed through the lens of human experience:
+				</p>
+				<ul class="content-list">
+					<li><strong>Digital Culture:</strong> How technology shapes our relationships, work, and daily lives</li>
+					<li><strong>Human Psychology:</strong> The intersection of technology and human behavior</li>
+					<li><strong>Ethics & Values:</strong> Moral considerations in our digital age</li>
+					<li><strong>Society & Community:</strong> Building meaningful connections in a connected world</li>
+					<li><strong>Future Thinking:</strong> Preparing for what comes next while staying grounded in what makes us human</li>
+				</ul>
+			</section>
 
-	<h2>Our Approach</h2>
-	<p>
-		We believe in thoughtful, well-researched content that doesn't rush to conclusions. Each piece is crafted with care, considering multiple perspectives and avoiding the quick takes that dominate much of digital discourse. We're not here to predict the future or provide easy answers, but rather to ask the right questions and explore the complexities of modern life.
-	</p>
+			<section class="content-section">
+				<h2 class="section-title">Our Approach</h2>
+				<p class="section-text">
+					We believe in thoughtful, well-researched content that doesn't rush to conclusions. Each piece is crafted with care, considering multiple perspectives and avoiding the quick takes that dominate much of digital discourse. We're not here to predict the future or provide easy answers, but rather to ask the right questions and explore the complexities of modern life.
+				</p>
+			</section>
 
-	<h2>Open Source & Transparent</h2>
-	<p>
-		This site is built with open source tools and is itself open source. We believe in transparency and community contribution. The code is available on <a href="https://github.com/withastro/astro" target="_blank" rel="noopener">GitHub</a>, and we welcome contributions, suggestions, and discussions about both the content and the technology that powers it.
-	</p>
+			<section class="content-section">
+				<h2 class="section-title">Open Source & Transparent</h2>
+				<p class="section-text">
+					This site is built with open source tools and is itself open source. We believe in transparency and community contribution. The code is available on <a href="https://github.com/withastro/astro" target="_blank" rel="noopener">GitHub</a>, and we welcome contributions, suggestions, and discussions about both the content and the technology that powers it.
+				</p>
+			</section>
 
-	<h2>Get in Touch</h2>
-	<p>
-		We'd love to hear from you. Whether you have thoughts on our content, suggestions for topics to explore, or just want to share your own observations about modern humanity, we're here to listen. You can find us on social media or reach out through our contact channels.
-	</p>
+			<section class="content-section">
+				<h2 class="section-title">Get in Touch</h2>
+				<p class="section-text">
+					We'd love to hear from you. Whether you have thoughts on our content, suggestions for topics to explore, or just want to share your own observations about modern humanity, we're here to listen. You can find us on social media or reach out through our contact channels.
+				</p>
+			</section>
+		</article>
+	</main>
 </PageLayout>
+
+<style>
+	/* Hero Section */
+	.hero-section {
+		background: var(--color-background);
+		padding: var(--space-24) 0 var(--space-20);
+		text-align: center;
+		border-bottom: 1px solid var(--color-border-light);
+	}
+
+	.hero-content {
+		max-width: var(--container-prose);
+		margin: 0 auto;
+		padding: 0 var(--space-6);
+	}
+
+	.hero-title {
+		font-family: var(--font-serif);
+		font-size: var(--text-5xl);
+		font-weight: 700;
+		line-height: var(--leading-tight);
+		color: var(--color-primary);
+		margin: 0 0 var(--space-8) 0;
+		letter-spacing: -0.02em;
+	}
+
+	.hero-subtitle {
+		font-size: var(--text-xl);
+		line-height: var(--leading-relaxed);
+		color: var(--color-secondary);
+		margin: 0;
+		max-width: 600px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	/* Main Content */
+	.main-content {
+		max-width: var(--container-prose);
+		margin: 0 auto;
+		padding: var(--space-20) var(--space-6);
+	}
+
+	.content-article {
+		width: 100%;
+	}
+
+	.content-section {
+		margin-bottom: var(--space-16);
+	}
+
+	.content-section:last-child {
+		margin-bottom: 0;
+	}
+
+	.section-title {
+		font-family: var(--font-serif);
+		font-size: var(--text-2xl);
+		font-weight: 700;
+		line-height: var(--leading-tight);
+		color: var(--color-primary);
+		margin: 0 0 var(--space-6) 0;
+	}
+
+	.section-text {
+		font-size: var(--text-lg);
+		line-height: var(--leading-relaxed);
+		color: var(--color-primary);
+		margin: 0 0 var(--space-6) 0;
+	}
+
+	.content-list {
+		margin: var(--space-6) 0;
+		padding-left: var(--space-6);
+	}
+
+	.content-list li {
+		font-size: var(--text-lg);
+		line-height: var(--leading-relaxed);
+		color: var(--color-primary);
+		margin-bottom: var(--space-4);
+	}
+
+	.content-list li:last-child {
+		margin-bottom: 0;
+	}
+
+	/* Responsive Design */
+	@media (max-width: 1024px) {
+		.hero-section {
+			padding: var(--space-20) 0 var(--space-16);
+		}
+
+		.hero-title {
+			font-size: var(--text-4xl);
+		}
+
+		.main-content {
+			padding: var(--space-16) var(--space-6);
+		}
+
+		.content-section {
+			margin-bottom: var(--space-12);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.hero-section {
+			padding: var(--space-16) 0 var(--space-12);
+		}
+
+		.hero-content {
+			padding: 0 var(--space-4);
+		}
+
+		.hero-title {
+			font-size: var(--text-3xl);
+			margin-bottom: var(--space-6);
+		}
+
+		.hero-subtitle {
+			font-size: var(--text-lg);
+		}
+
+		.main-content {
+			padding: var(--space-12) var(--space-4);
+		}
+
+		.section-title {
+			font-size: var(--text-xl);
+		}
+
+		.section-text {
+			font-size: var(--text-base);
+		}
+
+		.content-list li {
+			font-size: var(--text-base);
+		}
+
+		.content-section {
+			margin-bottom: var(--space-8);
+		}
+	}
+
+	@media (max-width: 480px) {
+		.hero-section {
+			padding: var(--space-12) 0 var(--space-8);
+		}
+
+		.hero-title {
+			font-size: var(--text-2xl);
+			margin-bottom: var(--space-4);
+		}
+
+		.hero-subtitle {
+			font-size: var(--text-base);
+		}
+
+		.main-content {
+			padding: var(--space-8) var(--space-3);
+		}
+
+		.section-title {
+			font-size: var(--text-lg);
+		}
+
+		.section-text {
+			font-size: var(--text-sm);
+		}
+
+		.content-list li {
+			font-size: var(--text-sm);
+		}
+	}
+
+	/* Dark mode support */
+	[data-theme="dark"] .hero-section {
+		background: var(--color-background);
+		border-bottom-color: var(--color-border);
+	}
+
+	[data-theme="dark"] .hero-title {
+		color: var(--color-primary);
+	}
+
+	[data-theme="dark"] .hero-subtitle {
+		color: var(--color-secondary);
+	}
+
+	[data-theme="dark"] .section-title {
+		color: var(--color-primary);
+	}
+
+	[data-theme="dark"] .section-text {
+		color: var(--color-primary);
+	}
+
+	[data-theme="dark"] .content-list li {
+		color: var(--color-primary);
+	}
+</style>

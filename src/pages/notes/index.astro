@@ -10,15 +10,145 @@ const notes = (await getCollection('notes')).sort(
 ---
 
 <PageLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
-	<div class="container container-content py-16">
+	<!-- Hero Section -->
+	<section class="hero-section">
+		<div class="hero-content">
+			<h1 class="hero-title">Field Notes</h1>
+			<p class="hero-subtitle">
+				Thoughts, insights, and discoveries from the field.
+			</p>
+		</div>
+	</section>
+	
+	<!-- Main Content -->
+	<main class="main-content">
 		<NoteGrid 
 			notes={notes}
-			title="Field Notes"
-			description="Thoughts, insights, and discoveries from the field."
-			showTitle={true}
-			showDescription={true}
+			title=""
+			description=""
+			showTitle={false}
+			showDescription={false}
 			columns={3}
 			variant="default"
+			className="notes-grid"
 		/>
-	</div>
+	</main>
 </PageLayout>
+
+<style>
+	/* Hero Section */
+	.hero-section {
+		background: var(--color-background);
+		padding: var(--space-24) 0 var(--space-20);
+		text-align: center;
+		border-bottom: 1px solid var(--color-border-light);
+	}
+
+	.hero-content {
+		max-width: var(--container-prose);
+		margin: 0 auto;
+		padding: 0 var(--space-6);
+	}
+
+	.hero-title {
+		font-family: var(--font-serif);
+		font-size: var(--text-5xl);
+		font-weight: 700;
+		line-height: var(--leading-tight);
+		color: var(--color-primary);
+		margin: 0 0 var(--space-8) 0;
+		letter-spacing: -0.02em;
+	}
+
+	.hero-subtitle {
+		font-size: var(--text-xl);
+		line-height: var(--leading-relaxed);
+		color: var(--color-secondary);
+		margin: 0;
+		max-width: 600px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	/* Main Content */
+	.main-content {
+		max-width: var(--container-content);
+		margin: 0 auto;
+		padding: var(--space-20) var(--space-6);
+	}
+
+	.notes-grid {
+		width: 100%;
+	}
+
+	/* Responsive Design */
+	@media (max-width: 1024px) {
+		.hero-section {
+			padding: var(--space-20) 0 var(--space-16);
+		}
+
+		.hero-title {
+			font-size: var(--text-4xl);
+		}
+
+		.main-content {
+			padding: var(--space-16) var(--space-6);
+		}
+	}
+
+	@media (max-width: 768px) {
+		.hero-section {
+			padding: var(--space-16) 0 var(--space-12);
+		}
+
+		.hero-content {
+			padding: 0 var(--space-4);
+		}
+
+		.hero-title {
+			font-size: var(--text-3xl);
+			margin-bottom: var(--space-6);
+		}
+
+		.hero-subtitle {
+			font-size: var(--text-lg);
+		}
+
+		.main-content {
+			padding: var(--space-12) var(--space-4);
+		}
+	}
+
+	@media (max-width: 480px) {
+		.hero-section {
+			padding: var(--space-12) 0 var(--space-8);
+		}
+
+		.hero-title {
+			font-size: var(--text-2xl);
+			margin-bottom: var(--space-4);
+		}
+
+		.hero-subtitle {
+			font-size: var(--text-base);
+		}
+
+		.main-content {
+			padding: var(--space-8) var(--space-3);
+		}
+	}
+
+	/* Dark mode support */
+	[data-theme="dark"] .hero-section {
+		background: var(--color-background);
+		border-bottom-color: var(--color-border);
+	}
+
+	[data-theme="dark"] .hero-title {
+		color: var(--color-primary);
+	}
+
+	[data-theme="dark"] .hero-subtitle {
+		color: var(--color-secondary);
+	}
+</style>
