@@ -4,16 +4,16 @@ const packageJson = await import('../../package.json');
 const version = packageJson.version;
 ---
 
-<footer class="bg-subtle border-t border-border mt-20">
-	<div class="container container-content mx-auto py-12 px-6 text-center">
-		<div class="mb-8">
-			<p class="text-muted text-sm mb-4">
+<footer class="footer">
+	<div class="footer__container">
+		<div class="footer__content">
+			<p class="footer__copyright">
 				&copy; {today.getFullYear()} Strong Hands, Soft Heart LLC.
 			</p>
-			<div class="mb-0">
-				<p class="text-muted text-xs m-0 leading-relaxed">
-					<strong>Content:</strong> <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" class="text-accent no-underline hover:underline">CC BY-NC-SA 4.0</a> • 
-					<strong>Code:</strong> <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener" class="text-accent no-underline hover:underline">MIT</a> • 
+			<div class="footer__info">
+				<p class="footer__license">
+					<strong>Content:</strong> <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener" class="footer__link">CC BY-NC-SA 4.0</a> • 
+					<strong>Code:</strong> <a href="https://opensource.org/licenses/MIT" target="_blank" rel="noopener" class="footer__link">MIT</a> • 
 					<strong>Version:</strong> {version}
 				</p>
 			</div>
@@ -21,17 +21,87 @@ const version = packageJson.version;
 	</div>
 </footer>
 <style>
+	.footer {
+		background-color: var(--color-background-subtle);
+		border-top: 1px solid var(--color-border);
+		margin-top: var(--space-20);
+	}
+
+	.footer__container {
+		max-width: var(--container-content);
+		margin: 0 auto;
+		padding: var(--space-12) var(--space-6);
+		text-align: center;
+	}
+
+	.footer__content {
+		margin-bottom: var(--space-8);
+	}
+
+	.footer__copyright {
+		color: var(--color-muted);
+		font-size: var(--text-sm);
+		margin-bottom: var(--space-4);
+		margin: 0;
+	}
+
+	.footer__info {
+		margin-bottom: 0;
+	}
+
+	.footer__license {
+		color: var(--color-muted);
+		font-size: var(--text-xs);
+		margin: 0;
+		line-height: var(--leading-relaxed);
+	}
+
+	.footer__link {
+		color: var(--color-accent);
+		text-decoration: none;
+		transition: color var(--transition-smooth);
+	}
+
+	.footer__link:hover {
+		text-decoration: underline;
+		color: var(--color-accent-hover);
+	}
+
+	.footer__link:focus {
+		outline: 2px solid var(--color-accent);
+		outline-offset: 2px;
+	}
+
+	/* Dark mode support */
+	[data-theme="dark"] .footer {
+		background-color: var(--color-background-subtle);
+		border-top-color: var(--color-border);
+	}
+
+	[data-theme="dark"] .footer__copyright,
+	[data-theme="dark"] .footer__license {
+		color: var(--color-muted);
+	}
+
+	[data-theme="dark"] .footer__link {
+		color: var(--color-accent);
+	}
+
+	[data-theme="dark"] .footer__link:hover {
+		color: var(--color-accent-hover);
+	}
+
 	/* Responsive adjustments for footer */
 	@media (max-width: 768px) {
-		.footer-content {
+		.footer__container {
 			padding: var(--space-8) var(--space-4);
 		}
 
-		.footer-info {
+		.footer__content {
 			margin-bottom: var(--space-6);
 		}
 
-		.license-text {
+		.footer__license {
 			font-size: 0.7rem;
 		}
 	}

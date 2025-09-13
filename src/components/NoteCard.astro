@@ -332,24 +332,22 @@ const imageSize = imageSizes[variant];
 		outline-offset: 2px;
 	}
 
-	/* Dark mode support (if needed in future) */
-	@media (prefers-color-scheme: dark) {
-		.note-card {
-			background: #1a1a1a;
-			border-color: #333;
-		}
+	/* Dark mode support using CSS variables */
+	[data-theme="dark"] .note-card {
+		background: var(--color-background);
+		border-color: var(--color-border);
+	}
 
-		.note-card__title {
-			color: #ffffff;
-		}
+	[data-theme="dark"] .note-card__title {
+		color: var(--color-primary);
+	}
 
-		.note-card__description {
-			color: #a0a0a0;
-		}
+	[data-theme="dark"] .note-card__description {
+		color: var(--color-secondary);
+	}
 
-		.note-card__date,
-		.note-card__updated {
-			color: #666;
-		}
+	[data-theme="dark"] .note-card__date,
+	[data-theme="dark"] .note-card__updated {
+		color: var(--color-muted);
 	}
 </style>

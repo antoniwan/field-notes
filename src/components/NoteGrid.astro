@@ -255,11 +255,22 @@ const gridConfig = getGridConfig();
 	/* High contrast mode support */
 	@media (prefers-contrast: high) {
 		.note-grid__title {
-			color: #000000;
+			color: var(--color-primary);
 		}
 
 		.note-grid__description {
-			color: #333333;
+			color: var(--color-secondary);
+		}
+	}
+
+	/* Dark mode high contrast support */
+	[data-theme="dark"] @media (prefers-contrast: high) {
+		.note-grid__title {
+			color: var(--color-primary);
+		}
+
+		.note-grid__description {
+			color: var(--color-secondary);
 		}
 	}
 
