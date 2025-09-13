@@ -12,6 +12,9 @@ const notes = defineCollection({
 				// Transform string to Date object
 				pubDate: z.coerce.date(),
 				heroImage: image().optional(),
+				readingTime: z.number().optional(),
+				category: z.string().optional(),
+				tags: z.array(z.string()).optional().default([]),
 			}),
 });
 

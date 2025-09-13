@@ -1,0 +1,257 @@
+---
+import FormattedDate from './FormattedDate.astro';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+	title: string;
+	description: string;
+	pubDate: Date;
+	heroImage?: ImageMetadata;
+	readingTime?: number;
+	category?: string;
+	tags?: string[];
+}
+
+const { 
+	title, 
+	description, 
+	pubDate, 
+	heroImage,
+	readingTime,
+	category,
+	tags = []
+} = Astro.props;
+---
+
+<aside class="post-sidebar">
+	<!-- Mobile: Title is always visible at top -->
+	<div class="sidebar-title-mobile">
+		<h1 class="note-title">{title}</h1>
+		{description && (
+			<p class="note-description">{description}</p>
+		)}
+	</div>
+
+	<!-- Desktop: Full sidebar content -->
+	<div class="sidebar-content">
+		<div class="sidebar-title-desktop">
+			<h1 class="note-title">{title}</h1>
+			{description && (
+				<p class="note-description">{description}</p>
+			)}
+		</div>
+
+		<div class="sidebar-metadata">
+			<div class="metadata-item">
+				<h3 class="metadata-label">Published</h3>
+				<time datetime={pubDate.toISOString()} class="metadata-value">
+					<FormattedDate date={pubDate} />
+				</time>
+			</div>
+
+			{readingTime && (
+				<div class="metadata-item">
+					<h3 class="metadata-label">Reading Time</h3>
+					<span class="metadata-value">{readingTime} min read</span>
+				</div>
+			)}
+
+			{category && (
+				<div class="metadata-item">
+					<h3 class="metadata-label">Category</h3>
+					<span class="metadata-value category-value">
+						<span class="category-icon">📁</span>
+						{category}
+					</span>
+				</div>
+			)}
+
+			{tags.length > 0 && (
+				<div class="metadata-item">
+					<h3 class="metadata-label">Tags</h3>
+					<div class="tags-list">
+						{tags.map((tag) => (
+							<a href={`/notes?tag=${encodeURIComponent(tag)}`} class="tag">
+								#{tag}
+							</a>
+						))}
+					</div>
+				</div>
+			)}
+		</div>
+	</div>
+</aside>
+
+<style>
+	.post-sidebar {
+		display: none; /* Hidden on mobile for maximum reading space */
+	}
+
+	/* Mobile: Title always visible at top */
+	.sidebar-title-mobile {
+		display: none; /* Hidden on mobile - title will be in main content */
+	}
+
+	.sidebar-title-desktop {
+		display: none;
+	}
+
+	.note-title {
+		font-family: var(--font-serif);
+		font-size: var(--text-2xl);
+		font-weight: 700;
+		line-height: var(--leading-tight);
+		color: var(--color-primary);
+		margin: 0 0 var(--space-3) 0;
+		letter-spacing: -0.02em;
+	}
+
+	.note-description {
+		font-size: var(--text-base);
+		line-height: var(--leading-relaxed);
+		color: var(--color-secondary);
+		margin: 0;
+		font-style: italic;
+	}
+
+	.sidebar-metadata {
+		display: none; /* Hidden on mobile */
+	}
+
+	.metadata-item {
+		margin-bottom: var(--space-6);
+	}
+
+	.metadata-label {
+		font-size: var(--text-xs);
+		font-weight: 600;
+		color: var(--color-muted);
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		margin: 0 0 var(--space-2) 0;
+	}
+
+	.metadata-value {
+		font-size: var(--text-sm);
+		font-weight: 500;
+		color: var(--color-primary);
+		display: block;
+	}
+
+	.category-value {
+		display: flex;
+		align-items: center;
+		gap: var(--space-2);
+	}
+
+	.category-icon {
+		font-size: var(--text-sm);
+	}
+
+	.tags-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-2);
+	}
+
+	.tag {
+		display: inline-block;
+		font-size: var(--text-xs);
+		font-weight: 500;
+		color: var(--color-accent);
+		text-decoration: none;
+		padding: var(--space-1) var(--space-2);
+		background: var(--color-background-subtle);
+		border-radius: var(--radius-sm);
+		transition: all var(--transition-smooth);
+		border: 1px solid var(--color-border-light);
+	}
+
+	.tag:hover {
+		background: var(--color-accent);
+		color: var(--color-background);
+		text-decoration: none;
+	}
+
+	/* Desktop styles */
+	@media (min-width: 1024px) {
+		.post-sidebar {
+			display: block;
+			width: 320px;
+			flex-shrink: 0;
+			position: sticky;
+			top: calc(var(--space-20) + var(--space-4)); /* Account for header height + padding */
+			height: fit-content;
+			background: var(--color-background);
+			border-right: 1px solid var(--color-border-light);
+			padding: var(--space-6);
+			z-index: 10;
+		}
+
+		.sidebar-title-mobile {
+			display: none;
+		}
+
+		.sidebar-title-desktop {
+			display: block;
+			margin-bottom: var(--space-8);
+		}
+
+		.sidebar-metadata {
+			display: block;
+		}
+
+		.note-title {
+			font-size: var(--text-3xl);
+		}
+
+		.note-description {
+			font-size: var(--text-lg);
+		}
+	}
+
+	/* Tablet styles - also hide sidebar for better reading experience */
+	@media (min-width: 768px) and (max-width: 1023px) {
+		.post-sidebar {
+			display: none; /* Hidden on tablet for better reading experience */
+		}
+	}
+
+	/* Dark mode support */
+	[data-theme="dark"] .post-sidebar {
+		background: var(--color-background);
+		border-right-color: var(--color-border);
+	}
+
+	[data-theme="dark"] .sidebar-title-mobile {
+		background: var(--color-background);
+		border-bottom-color: var(--color-border);
+	}
+
+	[data-theme="dark"] .note-title {
+		color: var(--color-primary);
+	}
+
+	[data-theme="dark"] .note-description {
+		color: var(--color-secondary);
+	}
+
+	[data-theme="dark"] .metadata-label {
+		color: var(--color-muted);
+	}
+
+	[data-theme="dark"] .metadata-value {
+		color: var(--color-primary);
+	}
+
+	[data-theme="dark"] .tag {
+		background: var(--color-background-subtle);
+		border-color: var(--color-border);
+		color: var(--color-accent);
+	}
+
+	[data-theme="dark"] .tag:hover {
+		background: var(--color-accent);
+		color: var(--color-background);
+	}
+</style>
