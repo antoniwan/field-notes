@@ -38,10 +38,12 @@ const notes = (await getCollection('notes')).sort(
 <style>
 	/* Hero Section */
 	.hero-section {
-		background: var(--color-background);
-		padding: var(--space-24) 0 var(--space-20);
+		background: linear-gradient(135deg, var(--color-background) 0%, var(--color-background-subtle) 100%);
+		padding: var(--space-32) 0 var(--space-24);
 		text-align: center;
 		border-bottom: 1px solid var(--color-border-light);
+		position: relative;
+		overflow: hidden;
 	}
 
 	.hero-content {
@@ -52,12 +54,14 @@ const notes = (await getCollection('notes')).sort(
 
 	.hero-title {
 		font-family: var(--font-serif);
-		font-size: var(--text-5xl);
-		font-weight: 700;
+		font-size: var(--text-6xl);
+		font-weight: 300;
 		line-height: var(--leading-tight);
 		color: var(--color-primary);
 		margin: 0 0 var(--space-8) 0;
-		letter-spacing: -0.02em;
+		letter-spacing: -0.03em;
+		position: relative;
+		animation: fadeInUp 0.8s ease-out;
 	}
 
 	.hero-subtitle {
@@ -68,13 +72,17 @@ const notes = (await getCollection('notes')).sort(
 		max-width: 600px;
 		margin-left: auto;
 		margin-right: auto;
+		font-weight: 400;
+		opacity: 0.9;
+		animation: fadeInUp 0.8s ease-out 0.2s both;
 	}
 
 	/* Main Content */
 	.main-content {
 		max-width: var(--container-content);
 		margin: 0 auto;
-		padding: var(--space-20) var(--space-6);
+		padding: var(--space-24) var(--space-6);
+		background: var(--color-background);
 	}
 
 	.notes-grid {
@@ -150,5 +158,25 @@ const notes = (await getCollection('notes')).sort(
 
 	[data-theme="dark"] .hero-subtitle {
 		color: var(--color-secondary);
+	}
+
+	/* Animations */
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(30px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	/* Reduced motion support */
+	@media (prefers-reduced-motion: reduce) {
+		.hero-title,
+		.hero-subtitle {
+			animation: none;
+		}
 	}
 </style>
