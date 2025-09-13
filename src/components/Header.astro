@@ -33,7 +33,7 @@ import ThemeToggle from './ThemeToggle.astro';
 		</div>
 
 		<!-- Brand/Logo - Centered -->
-		<div class="nav__brand">
+		<div class="nav__brand" id="nav-brand">
 			<a href="/" class="nav__brand-link" aria-label="Go to homepage">
 				<span class="nav__brand-text nav__brand-text--full">{SITE_TITLE}</span>
 				<span class="nav__brand-text nav__brand-text--mobile">Field Notes (oMH)</span>
@@ -97,6 +97,36 @@ import ThemeToggle from './ThemeToggle.astro';
 			link.classList.add('nav__link--active');
 		}
 	});
+
+	// Hide/show header title on homepage based on scroll position
+	const navBrand = document.getElementById('nav-brand');
+	const isHomepage = currentPath === '/' || currentPath === '/index.html';
+	
+	if (isHomepage && navBrand) {
+		// Initially hide the title on homepage
+		navBrand.classList.add('nav__brand--hidden');
+		
+		// Function to check if we've scrolled past the hero section
+		const checkScrollPosition = () => {
+			const heroSection = document.querySelector('.hero-section');
+			if (heroSection) {
+				const rect = heroSection.getBoundingClientRect();
+				const heroBottom = rect.bottom;
+				
+				if (heroBottom < 0) {
+					navBrand.classList.remove('nav__brand--hidden');
+				} else {
+					navBrand.classList.add('nav__brand--hidden');
+				}
+			}
+		};
+		
+		// Check on scroll
+		window.addEventListener('scroll', checkScrollPosition);
+		
+		// Check on page load
+		checkScrollPosition();
+	}
 </script>
 
 <style>
@@ -143,6 +173,14 @@ import ThemeToggle from './ThemeToggle.astro';
 	}
 
 	.nav__brand-text {
+		transition: all var(--transition-smooth);
+	}
+
+	/* Hide brand on homepage when at top */
+	.nav__brand--hidden {
+		opacity: 0;
+		visibility: hidden;
+		transform: translateX(-50%) translateY(-10px);
 		transition: all var(--transition-smooth);
 	}
 
