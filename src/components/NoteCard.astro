@@ -9,9 +9,6 @@ interface Props {
 	pubDate: Date;
 	slug: string;
 	heroImage?: ImageMetadata;
-	updatedDate?: Date;
-	showImage?: boolean;
-	variant?: 'default' | 'featured';
 	className?: string;
 }
 
@@ -21,28 +18,15 @@ const {
 	pubDate,
 	slug,
 	heroImage,
-	updatedDate,
-	showImage = true,
-	variant = 'default',
 	className = ''
 } = Astro.props;
 
-const cardClasses = {
-	default: 'note-card',
-	featured: 'note-card note-card--featured'
-};
-
-const imageSizes = {
-	default: { width: 120, height: 80 },
-	featured: { width: 160, height: 100 }
-};
-
-const imageSize = imageSizes[variant];
+const imageSize = { width: 120, height: 80 };
 ---
 
-<article class={`${cardClasses[variant]} ${className}`}>
+<article class={`note-card ${className}`}>
 	<a href={`/notes/${slug}/`} class="note-card__link">
-		{showImage && heroImage && (
+		{heroImage && (
 			<div class="note-card__image">
 				<Image
 					src={heroImage}
@@ -72,15 +56,6 @@ const imageSize = imageSizes[variant];
 				>
 					<FormattedDate date={pubDate} />
 				</time>
-				{updatedDate && updatedDate.getTime() !== pubDate.getTime() && (
-					<time 
-						class="note-card__updated" 
-						datetime={updatedDate.toISOString()}
-						title={`Updated on ${updatedDate.toLocaleDateString()}`}
-					>
-						Updated <FormattedDate date={updatedDate} />
-					</time>
-				)}
 			</footer>
 		</div>
 	</a>
@@ -216,32 +191,8 @@ const imageSize = imageSizes[variant];
 		letter-spacing: 0.05em;
 	}
 
-	.note-card__updated {
-		font-size: var(--text-xs);
-		color: var(--color-muted);
-		font-style: italic;
-	}
 
 
-	/* Featured variant */
-	.note-card--featured {
-		grid-column: span 2;
-	}
-
-	.note-card--featured .note-card__image {
-		width: 160px;
-		height: 100px;
-	}
-
-	.note-card--featured .note-card__title {
-		font-size: var(--text-xl);
-		margin-bottom: var(--space-3);
-	}
-
-	.note-card--featured .note-card__description {
-		font-size: var(--text-base);
-		-webkit-line-clamp: 3;
-	}
 
 	/* Responsive adjustments */
 	@media (max-width: 768px) {
@@ -265,18 +216,6 @@ const imageSize = imageSizes[variant];
 			min-height: auto;
 		}
 
-		.note-card--featured {
-			grid-column: span 1;
-		}
-
-		.note-card--featured .note-card__image {
-			width: 100%;
-			height: 140px;
-		}
-
-		.note-card--featured .note-card__title {
-			font-size: var(--text-lg);
-		}
 	}
 
 	@media (max-width: 480px) {

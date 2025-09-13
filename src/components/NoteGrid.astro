@@ -9,7 +9,6 @@ interface Props {
 	showTitle?: boolean;
 	showDescription?: boolean;
 	columns?: 1 | 2 | 3 | 4;
-	variant?: 'default' | 'masonry' | 'featured-first';
 	maxItems?: number;
 	className?: string;
 	emptyMessage?: string;
@@ -22,7 +21,6 @@ const {
 	showTitle = false,
 	showDescription = false,
 	columns = 3,
-	variant = 'default',
 	maxItems,
 	className = '',
 	emptyMessage = 'No notes found.'
@@ -31,26 +29,8 @@ const {
 // Limit notes if maxItems is specified
 const displayNotes = maxItems ? notes.slice(0, maxItems) : notes;
 
-// Grid configuration based on variant
-const getGridConfig = () => {
-	if (variant === 'featured-first' && displayNotes.length > 0) {
-		return {
-			gridClass: 'note-grid note-grid--featured-first'
-		};
-	}
-	
-	if (variant === 'masonry') {
-		return {
-			gridClass: 'note-grid note-grid--masonry'
-		};
-	}
-	
-	return {
-		gridClass: 'note-grid'
-	};
-};
-
-const gridConfig = getGridConfig();
+// Simple grid configuration
+const gridClass = 'note-grid';
 ---
 
 {displayNotes.length > 0 ? (
@@ -66,24 +46,16 @@ const gridConfig = getGridConfig();
 			</header>
 		)}
 		
-		<div class={gridConfig.gridClass}>
-			{displayNotes.map((note, index) => {
-				const isFeatured = variant === 'featured-first' && index === 0;
-				const cardVariant = isFeatured ? 'featured' : 'default';
-				
-				return (
-					<NoteCard
-						title={note.data.title}
-						description={note.data.description}
-						pubDate={note.data.pubDate}
-						slug={note.id}
-						heroImage={note.data.heroImage}
-						updatedDate={note.data.updatedDate}
-						variant={cardVariant}
-						showImage={true}
-					/>
-				);
-			})}
+		<div class={gridClass}>
+			{displayNotes.map((note) => (
+				<NoteCard
+					title={note.data.title}
+					description={note.data.description}
+					pubDate={note.data.pubDate}
+					slug={note.id}
+					heroImage={note.data.heroImage}
+				/>
+			))}
 		</div>
 	</section>
 ) : (
@@ -148,27 +120,6 @@ const gridConfig = getGridConfig();
 		}
 	}
 
-	/* Featured first variant */
-	.note-grid--featured-first {
-		grid-template-columns: 1fr;
-	}
-
-	@media (min-width: 768px) {
-		.note-grid--featured-first {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-		}
-	}
-
-	@media (min-width: 1024px) {
-		.note-grid--featured-first {
-			grid-template-columns: repeat(3, minmax(0, 1fr));
-		}
-	}
-
-	/* Masonry variant */
-	.note-grid--masonry {
-		grid-template-rows: masonry;
-	}
 
 
 	/* Responsive breakpoints for mobile */
