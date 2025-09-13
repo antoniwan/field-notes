@@ -5,6 +5,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 import ArticleFooter from '../components/ArticleFooter.astro';
 import Prose from '../components/Prose.astro';
 import PostSidebar from '../components/PostSidebar.astro';
+import CategoryBadge from '../components/CategoryBadge.astro';
 import type { ImageMetadata } from 'astro';
 
 interface Props {
@@ -83,10 +84,7 @@ const {
 							<span class="mobile-reading-time">{readingTime} min read</span>
 						)}
 						{category && (
-							<span class="mobile-category">
-								<span class="category-icon">📁</span>
-								{category}
-							</span>
+							<CategoryBadge category={category} size="small" className="mobile-category" />
 						)}
 					</div>
 					{tags.length > 0 && (
@@ -181,16 +179,14 @@ const {
 	}
 
 	.mobile-date,
-	.mobile-reading-time,
-	.mobile-category {
+	.mobile-reading-time {
 		display: flex;
 		align-items: center;
 		gap: var(--space-1);
 	}
 
 	.mobile-category {
-		font-weight: 500;
-		color: var(--color-primary);
+		/* CategoryBadge component handles its own styling */
 	}
 
 	.mobile-tags {
@@ -285,7 +281,7 @@ const {
 	}
 
 	[data-theme="dark"] .mobile-category {
-		color: var(--color-primary);
+		/* CategoryBadge component handles its own dark mode styling */
 	}
 
 	[data-theme="dark"] .mobile-tag {
