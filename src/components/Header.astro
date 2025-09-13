@@ -139,6 +139,7 @@ import ThemeToggle from './ThemeToggle.astro';
 		backdrop-filter: blur(10px);
 		border-bottom: 1px solid var(--color-border-light);
 		transition: all var(--transition-smooth);
+		max-height: 64px;
 	}
 
 	/* Navigation */
@@ -146,10 +147,12 @@ import ThemeToggle from './ThemeToggle.astro';
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: var(--space-4) var(--space-6);
+		padding: var(--space-3) var(--space-6);
 		max-width: var(--container-content);
 		margin: 0 auto;
 		position: relative;
+		height: 64px;
+		min-height: 64px;
 	}
 
 	/* Brand - Centered */
@@ -185,11 +188,11 @@ import ThemeToggle from './ThemeToggle.astro';
 	}
 
 	.nav__brand-text--full {
-		font-size: var(--text-xs); /* Extra tiny on mobile */
+		font-size: var(--text-sm); /* Small size for mobile */
 	}
 
 	.nav__brand-text--mobile {
-		font-size: 0.625rem; /* 10px - very small for mobile */
+		font-size: var(--text-xs); /* 12px - readable on mobile */
 		display: none;
 	}
 
@@ -267,7 +270,7 @@ import ThemeToggle from './ThemeToggle.astro';
 	/* Navigation Menu */
 	.nav__menu {
 		position: absolute;
-		top: 100%;
+		top: 64px;
 		left: 0;
 		right: 0;
 		background: var(--color-background);
@@ -341,7 +344,7 @@ import ThemeToggle from './ThemeToggle.astro';
 	/* Desktop Styles */
 	@media (min-width: 768px) {
 		.nav {
-			padding: var(--space-4) var(--space-8);
+			padding: var(--space-3) var(--space-8);
 		}
 
 		.nav__toggle {
@@ -405,18 +408,18 @@ import ThemeToggle from './ThemeToggle.astro';
 	/* Tablet */
 	@media (min-width: 768px) {
 		.nav__brand-text--full {
-			font-size: var(--text-sm); /* Small size for tablet */
+			font-size: var(--text-lg); /* Medium size for tablet */
 		}
 	}
 
 	/* Large Desktop */
 	@media (min-width: 1024px) {
 		.nav {
-			padding: var(--space-6) var(--space-8);
+			padding: var(--space-3) var(--space-8);
 		}
 
 		.nav__brand-text--full {
-			font-size: var(--text-2xl); /* Larger for desktop */
+			font-size: var(--text-xl); /* Appropriate size for 64px height */
 		}
 
 		.nav__link {
