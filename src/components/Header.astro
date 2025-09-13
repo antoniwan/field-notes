@@ -98,6 +98,42 @@ import ThemeToggle from './ThemeToggle.astro';
 		}
 	});
 
+	// Header scroll behavior - hide on scroll down, show on scroll up
+	const header = document.querySelector('.header') as HTMLElement | null;
+	let lastScrollY = window.scrollY;
+	let ticking = false;
+
+	const updateHeader = () => {
+		const currentScrollY = window.scrollY;
+		
+		// Only hide/show if scrolled more than 100px to avoid flickering
+		if (Math.abs(currentScrollY - lastScrollY) < 5) {
+			ticking = false;
+			return;
+		}
+
+		if (currentScrollY > lastScrollY && currentScrollY > 100) {
+			// Scrolling down - hide header
+			header?.classList.add('header--hidden');
+		} else {
+			// Scrolling up - show header
+			header?.classList.remove('header--hidden');
+		}
+
+		lastScrollY = currentScrollY;
+		ticking = false;
+	};
+
+	const onScroll = () => {
+		if (!ticking) {
+			requestAnimationFrame(updateHeader);
+			ticking = true;
+		}
+	};
+
+	// Add scroll listener
+	window.addEventListener('scroll', onScroll, { passive: true });
+
 	// Hide/show header title on homepage based on scroll position
 	const navBrand = document.getElementById('nav-brand');
 	const isHomepage = currentPath === '/' || currentPath === '/index.html';
@@ -138,8 +174,13 @@ import ThemeToggle from './ThemeToggle.astro';
 		background: var(--header-bg);
 		backdrop-filter: blur(10px);
 		border-bottom: 1px solid var(--color-border-light);
-		transition: all var(--transition-smooth);
+		transition: transform var(--transition-smooth);
 		max-height: 64px;
+	}
+
+	/* Header scroll behavior */
+	.header--hidden {
+		transform: translateY(-100%);
 	}
 
 	/* Navigation */
