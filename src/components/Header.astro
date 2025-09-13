@@ -317,6 +317,7 @@ import ThemeToggle from './ThemeToggle.astro';
 	.nav__link:hover {
 		color: var(--color-accent);
 		background: var(--color-background-subtle);
+		transform: translateY(-1px);
 	}
 
 	.nav__link:focus {
@@ -368,7 +369,7 @@ import ThemeToggle from './ThemeToggle.astro';
 		}
 
 		.nav__link {
-			padding: var(--space-2) 0; /* Minimal padding for clean look */
+			padding: var(--space-2) var(--space-4); /* Proper horizontal padding */
 			border-radius: 0;
 			font-size: var(--text-sm);
 			position: relative;
@@ -391,6 +392,12 @@ import ThemeToggle from './ThemeToggle.astro';
 			right: 0;
 			height: 1px;
 			background: var(--color-accent);
+		}
+
+		.nav__link:hover {
+			color: var(--color-accent);
+			background: var(--color-background-subtle);
+			transform: translateY(-1px);
 		}
 	}
 
@@ -424,7 +431,7 @@ import ThemeToggle from './ThemeToggle.astro';
 
 		.nav__link {
 			font-size: var(--text-sm); /* Keep small, body text size */
-			padding: var(--space-2) 0;
+			padding: var(--space-2) var(--space-4);
 		}
 
 		.nav__list {
