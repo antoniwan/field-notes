@@ -1,5 +1,6 @@
 ---
 import { SITE_TITLE } from '../consts';
+import ThemeToggle from './ThemeToggle.astro';
 ---
 
 <header class="header">
@@ -34,13 +35,14 @@ import { SITE_TITLE } from '../consts';
 		<!-- Brand/Logo - Centered -->
 		<div class="nav__brand">
 			<a href="/" class="nav__brand-link" aria-label="Go to homepage">
-				{SITE_TITLE}
+				<span class="nav__brand-text nav__brand-text--full">{SITE_TITLE}</span>
+				<span class="nav__brand-text nav__brand-text--mobile">Field Notes (oMH)</span>
 			</a>
 		</div>
 
-		<!-- Right side utility (placeholder for future features) -->
+		<!-- Right side utility area -->
 		<div class="nav__utility">
-			<!-- Future: Search, Subscribe, etc. -->
+			<ThemeToggle />
 		</div>
 	</nav>
 </header>
@@ -130,13 +132,27 @@ import { SITE_TITLE } from '../consts';
 
 	.nav__brand-link {
 		font-family: var(--font-serif);
-		font-size: var(--text-xs); /* Extra tiny on mobile */
 		font-weight: 400; /* Regular weight like The Atlantic */
 		color: var(--color-primary);
 		text-decoration: none;
 		transition: color var(--transition-smooth);
 		letter-spacing: -0.02em;
 		line-height: 1.1;
+		display: flex;
+		align-items: center;
+	}
+
+	.nav__brand-text {
+		transition: all var(--transition-smooth);
+	}
+
+	.nav__brand-text--full {
+		font-size: var(--text-xs); /* Extra tiny on mobile */
+	}
+
+	.nav__brand-text--mobile {
+		font-size: 0.625rem; /* 10px - very small for mobile */
+		display: none;
 	}
 
 	.nav__brand-link:hover {
@@ -149,8 +165,11 @@ import { SITE_TITLE } from '../consts';
 		border-radius: var(--radius-sm);
 	}
 
-	/* Utility area for future features */
+	/* Utility area for theme toggle and future features */
 	.nav__utility {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		width: 2rem; /* Same width as mobile toggle for balance */
 		height: 2rem;
 	}
@@ -334,9 +353,20 @@ import { SITE_TITLE } from '../consts';
 		}
 	}
 
+	/* Mobile-specific styles */
+	@media (max-width: 767px) {
+		.nav__brand-text--full {
+			display: none;
+		}
+
+		.nav__brand-text--mobile {
+			display: block;
+		}
+	}
+
 	/* Tablet */
 	@media (min-width: 768px) {
-		.nav__brand-link {
+		.nav__brand-text--full {
 			font-size: var(--text-sm); /* Small size for tablet */
 		}
 	}
@@ -347,7 +377,7 @@ import { SITE_TITLE } from '../consts';
 			padding: var(--space-6) var(--space-8);
 		}
 
-		.nav__brand-link {
+		.nav__brand-text--full {
 			font-size: var(--text-2xl); /* Larger for desktop */
 		}
 

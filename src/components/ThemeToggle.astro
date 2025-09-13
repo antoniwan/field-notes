@@ -1,0 +1,118 @@
+---
+// ThemeToggle component for switching between light and dark modes
+---
+
+<button 
+  class="theme-toggle" 
+  aria-label="Toggle dark mode"
+  title="Toggle dark mode"
+>
+  <svg class="theme-toggle__icon theme-toggle__icon--sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="5"/>
+    <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+  </svg>
+  <svg class="theme-toggle__icon theme-toggle__icon--moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+  </svg>
+</button>
+
+<script>
+  // Theme toggle functionality
+  const themeToggle = document.querySelector('.theme-toggle') as HTMLButtonElement;
+  const html = document.documentElement;
+  
+  // Check for saved theme preference or default to light mode
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  
+  // Apply the saved theme
+  html.setAttribute('data-theme', currentTheme);
+  
+  // Update button state based on current theme
+  const updateButtonState = (theme: string) => {
+    const sunIcon = themeToggle?.querySelector('.theme-toggle__icon--sun');
+    const moonIcon = themeToggle?.querySelector('.theme-toggle__icon--moon');
+    
+    if (theme === 'dark') {
+      sunIcon?.classList.add('theme-toggle__icon--hidden');
+      moonIcon?.classList.remove('theme-toggle__icon--hidden');
+    } else {
+      sunIcon?.classList.remove('theme-toggle__icon--hidden');
+      moonIcon?.classList.add('theme-toggle__icon--hidden');
+    }
+  };
+  
+  // Initialize button state
+  updateButtonState(currentTheme);
+  
+  // Toggle theme on button click
+  themeToggle?.addEventListener('click', () => {
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    html.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateButtonState(newTheme);
+  });
+  
+  // Listen for system theme changes
+  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  mediaQuery.addEventListener('change', (e) => {
+    // Only update if user hasn't set a preference
+    if (!localStorage.getItem('theme')) {
+      const newTheme = e.matches ? 'dark' : 'light';
+      html.setAttribute('data-theme', newTheme);
+      updateButtonState(newTheme);
+    }
+  });
+</script>
+
+<style>
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-smooth);
+    color: var(--color-primary);
+  }
+
+  .theme-toggle:hover {
+    background: var(--color-background-subtle);
+    transform: scale(1.05);
+  }
+
+  .theme-toggle:focus {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .theme-toggle__icon {
+    position: absolute;
+    transition: all var(--transition-smooth);
+  }
+
+  .theme-toggle__icon--hidden {
+    opacity: 0;
+    transform: rotate(180deg) scale(0.8);
+  }
+
+  .theme-toggle__icon:not(.theme-toggle__icon--hidden) {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+
+  /* Dark mode styles */
+  [data-theme="dark"] .theme-toggle {
+    color: var(--color-primary);
+  }
+
+  [data-theme="dark"] .theme-toggle:hover {
+    background: var(--color-background-subtle);
+  }
+</style>
