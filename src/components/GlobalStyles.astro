@@ -106,22 +106,28 @@
     --breakpoint-xl: 1280px;
     --breakpoint-2xl: 1536px;
     
-    /* Shadows */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
-    --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-    --shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.06);
+  /* Shadows - Enhanced with more modern, subtle shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+  --shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.06);
+  
+  /* Enhanced shadows for modern feel */
+  --shadow-card: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-card-hover: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-elevated: 0 8px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  --shadow-glow: 0 0 0 1px rgb(0 0 0 / 0.05), 0 1px 2px 0 rgb(0 0 0 / 0.1);
     
-    /* Border Radius */
-    --radius-sm: 0;
-    --radius-md: 0;
-    --radius-lg: 0;
-    --radius-xl: 0;
-    --radius-2xl: 0;
-    --radius-3xl: 0;
-    --radius-full: 0;
+    /* Border Radius - Subtle modern rounding */
+    --radius-sm: 2px;
+    --radius-md: 4px;
+    --radius-lg: 6px;
+    --radius-xl: 8px;
+    --radius-2xl: 12px;
+    --radius-3xl: 16px;
+    --radius-full: 9999px;
     
     /* Z-Index Scale */
     --z-dropdown: 1000;
@@ -228,6 +234,7 @@
   a:focus {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
+    border-radius: var(--radius-sm);
   }
 
   /* Lists */
@@ -247,7 +254,7 @@
     font-size: 0.875em;
     background-color: var(--color-background-subtle);
     padding: var(--space-1) var(--space-2);
-    border-radius: 0;
+    border-radius: var(--radius-sm);
     border: 1px solid var(--color-border-light);
   }
 
@@ -257,10 +264,11 @@
     line-height: var(--leading-relaxed);
     background-color: var(--color-background-subtle);
     padding: var(--space-6);
-    border-radius: 0;
+    border-radius: var(--radius-md);
     border: 1px solid var(--color-border-light);
     overflow-x: auto;
     margin: var(--space-6) 0;
+    box-shadow: var(--shadow-card);
   }
 
   pre code {
@@ -279,15 +287,17 @@
     color: var(--color-secondary);
     background-color: var(--color-background-subtle);
     padding: var(--space-4) var(--space-6);
-    border-radius: 0;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
   }
 
   /* Images */
   img {
     max-width: 100%;
     height: auto;
-    border-radius: 0;
+    border-radius: var(--radius-md);
     margin: var(--space-6) 0;
+    box-shadow: var(--shadow-card);
   }
 
   /* Tables */
@@ -329,14 +339,15 @@
     width: 100%;
     padding: var(--space-3);
     border: 1px solid var(--color-border);
-    border-radius: 0;
+    border-radius: var(--radius-sm);
     background-color: var(--color-background);
+    transition: border-color var(--transition-smooth), box-shadow var(--transition-smooth);
   }
 
   input:focus, textarea:focus {
     outline: none;
     border-color: var(--color-accent);
-    box-shadow: 0 0 0 3px rgb(37 99 235 / 0.1);
+    box-shadow: 0 0 0 3px rgb(37 99 235 / 0.1), var(--shadow-glow);
   }
 
   /* Layout */

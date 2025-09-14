@@ -154,6 +154,8 @@ const gridClass = 'note-grid';
 	/* Animation for grid items */
 	.note-grid > * {
 		animation: fadeInUp 0.6s ease-out;
+		opacity: 0;
+		animation-fill-mode: forwards;
 	}
 
 	.note-grid > *:nth-child(1) { animation-delay: 0.1s; }
@@ -162,6 +164,9 @@ const gridClass = 'note-grid';
 	.note-grid > *:nth-child(4) { animation-delay: 0.4s; }
 	.note-grid > *:nth-child(5) { animation-delay: 0.5s; }
 	.note-grid > *:nth-child(6) { animation-delay: 0.6s; }
+	.note-grid > *:nth-child(7) { animation-delay: 0.7s; }
+	.note-grid > *:nth-child(8) { animation-delay: 0.8s; }
+	.note-grid > *:nth-child(9) { animation-delay: 0.9s; }
 
 	@keyframes fadeInUp {
 		from {
