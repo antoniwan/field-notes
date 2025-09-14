@@ -15,6 +15,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const { title, description, image = FallbackImage } = Astro.props;
 ---
 
+<!-- Theme Application Script - Must run before any styles to prevent flash -->
+<script is:inline>
+  // Apply theme immediately to prevent white flash
+  (function() {
+    const theme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
+
 <!-- Global Styles -->
 <GlobalStyles />
 

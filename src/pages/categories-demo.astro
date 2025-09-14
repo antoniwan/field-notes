@@ -1,16 +1,6 @@
 ---
-import { getAllCategories, getNoteStatistics, groupNotesByCategory } from '../utils/categories';
-import { getCollection } from 'astro:content';
-import CategoryDisplay from '../components/CategoryDisplay.astro';
-
-// Get all notes
-const allNotes = await getCollection('notes');
-
-// Get category statistics
-const stats = getNoteStatistics(allNotes);
-
-// Group notes by category
-const notesByCategory = groupNotesByCategory(allNotes);
+import { getAllCategories } from '../utils/categories';
+import CategoryBadge from '../components/CategoryBadge.astro';
 
 // Get all available categories
 const categories = getAllCategories();
@@ -32,19 +22,19 @@ const categories = getAllCategories();
       </header>
 
       <section class="stats">
-        <h2>Category Statistics</h2>
+        <h2>Category System</h2>
         <div class="stats-grid">
           <div class="stat-card">
-            <h3>Total Notes</h3>
-            <div class="stat-number">{stats.totalNotes}</div>
+            <h3>Total Categories</h3>
+            <div class="stat-number">{categories.length}</div>
           </div>
           <div class="stat-card">
-            <h3>Categories Used</h3>
-            <div class="stat-number">{Object.keys(stats.categoryCounts).length}</div>
+            <h3>Total Themes</h3>
+            <div class="stat-number">{categories.reduce((total, cat) => total + cat.themes.length, 0)}</div>
           </div>
           <div class="stat-card">
-            <h3>Themes Used</h3>
-            <div class="stat-number">{Object.keys(stats.themeCounts).length}</div>
+            <h3>Life Areas</h3>
+            <div class="stat-number">8</div>
           </div>
         </div>
       </section>
@@ -62,7 +52,6 @@ const categories = getAllCategories();
               </div>
               <p class="category-description">{category.description}</p>
               <div class="category-stats">
-                <span class="note-count">{stats.categoryCounts[category.slug] || 0} notes</span>
                 <span class="theme-count">{category.themes.length} themes</span>
               </div>
               <div class="themes-preview">
@@ -80,58 +69,26 @@ const categories = getAllCategories();
         </div>
       </section>
 
-      <section class="notes-by-category">
-        <h2>Notes by Category</h2>
-        {Object.entries(notesByCategory).map(([categorySlug, notes]) => {
-          if (notes.length === 0) return null;
-          const category = categories.find(c => c.slug === categorySlug);
-          return (
-            <div class="category-section">
-              <div class="category-header">
-                <CategoryDisplay 
-                  category={categorySlug} 
-                  showIcon={true}
-                  showDescription={false}
-                />
-                <span class="note-count">{notes.length} notes</span>
-              </div>
-              <div class="notes-grid">
-                {notes.map(note => (
-                  <div class="note-card">
-                    <h4>{note.data.title}</h4>
-                    <p class="note-description">{note.data.description}</p>
-                    <div class="note-meta">
-                      <span class="note-date">{note.data.pubDate.toLocaleDateString()}</span>
-                      {note.data.themes && note.data.themes.length > 0 && (
-                        <div class="note-themes">
-                          {note.data.themes.map(theme => (
-                            <span class="theme-tag small" style={`background-color: ${category?.color}20; color: ${category?.color}`}>
-                              {theme}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
+      <section class="category-examples">
+        <h2>Category Examples</h2>
+        <div class="examples-grid">
+          {categories.map(category => (
+            <div class="example-card">
+              <CategoryBadge 
+                category={category.slug} 
+                showIcon={true}
+                size="large"
+              />
+              <p class="example-description">{category.description}</p>
+              <div class="themes-list">
+                {category.themes.map(theme => (
+                  <span class="theme-tag" style={`background-color: ${category.color}20; color: ${category.color}`}>
+                    {theme}
+                  </span>
                 ))}
               </div>
             </div>
-          );
-        })}
-      </section>
-
-      <section class="theme-breakdown">
-        <h2>Most Used Themes</h2>
-        <div class="themes-list">
-          {Object.entries(stats.themeCounts)
-            .sort(([,a], [,b]) => b - a)
-            .slice(0, 10)
-            .map(([theme, count]) => (
-              <div class="theme-item">
-                <span class="theme-name">{theme}</span>
-                <span class="theme-count">{count} notes</span>
-              </div>
-            ))}
+          ))}
         </div>
       </section>
     </div>
@@ -271,112 +228,39 @@ const categories = getAllCategories();
         font-style: italic;
       }
 
-      .notes-by-category {
+      .category-examples {
         margin-bottom: 3rem;
       }
 
-      .notes-by-category h2 {
+      .category-examples h2 {
         font-size: 2rem;
         margin-bottom: 1.5rem;
         color: #1f2937;
       }
 
-      .category-section {
-        margin-bottom: 2rem;
-      }
-
-      .category-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 1rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 1px solid #e5e7eb;
-      }
-
-      .note-count {
-        font-size: 0.9rem;
-        color: #6b7280;
-        font-weight: 500;
-      }
-
-      .notes-grid {
+      .examples-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1rem;
+        gap: 1.5rem;
       }
 
-      .note-card {
+      .example-card {
         background: #f9fafb;
-        padding: 1rem;
+        padding: 1.5rem;
         border-radius: 0.5rem;
         border: 1px solid #e5e7eb;
       }
 
-      .note-card h4 {
-        margin: 0 0 0.5rem 0;
-        color: #1f2937;
-        font-size: 1.1rem;
-      }
-
-      .note-description {
+      .example-description {
         color: #6b7280;
+        margin: 1rem 0;
         font-size: 0.9rem;
-        margin-bottom: 0.75rem;
-      }
-
-      .note-meta {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 0.8rem;
-        color: #6b7280;
-      }
-
-      .note-themes {
-        display: flex;
-        gap: 0.25rem;
-        flex-wrap: wrap;
-      }
-
-      .theme-tag.small {
-        padding: 0.125rem 0.375rem;
-        font-size: 0.7rem;
-      }
-
-      .theme-breakdown h2 {
-        font-size: 2rem;
-        margin-bottom: 1.5rem;
-        color: #1f2937;
       }
 
       .themes-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 0.75rem;
-      }
-
-      .theme-item {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0.75rem;
-        background: #f9fafb;
-        border-radius: 0.25rem;
-        border: 1px solid #e5e7eb;
-      }
-
-      .theme-name {
-        font-weight: 500;
-        color: #1f2937;
-      }
-
-      .theme-count {
-        font-size: 0.8rem;
-        color: #6b7280;
-        background: #e5e7eb;
-        padding: 0.25rem 0.5rem;
-        border-radius: 0.25rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
       }
 
       @media (prefers-color-scheme: dark) {
@@ -385,16 +269,16 @@ const categories = getAllCategories();
           color: #f9fafb;
         }
 
-        header h1, .stats h2, .categories-overview h2, .notes-by-category h2, .theme-breakdown h2 {
+        header h1, .stats h2, .categories-overview h2, .category-examples h2 {
           color: #f9fafb;
         }
 
-        .stat-card, .category-card, .note-card, .theme-item {
+        .stat-card, .category-card, .example-card {
           background: #1f2937;
           border-color: #374151;
         }
 
-        .category-description, .note-description, .note-count, .theme-count {
+        .category-description, .example-description, .theme-count {
           color: #9ca3af;
         }
       }

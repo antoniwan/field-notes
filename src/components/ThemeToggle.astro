@@ -21,11 +21,8 @@
   const themeToggle = document.querySelector('.theme-toggle') as HTMLButtonElement;
   const html = document.documentElement;
   
-  // Check for saved theme preference or default to light mode
-  const currentTheme = localStorage.getItem('theme') || 'light';
-  
-  // Apply the saved theme
-  html.setAttribute('data-theme', currentTheme);
+  // Get current theme (already applied by BaseHead script)
+  const currentTheme = html.getAttribute('data-theme') || 'light';
   
   // Update button state based on current theme
   const updateButtonState = (theme: string) => {
