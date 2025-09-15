@@ -8,6 +8,11 @@ interface Props {
 	image?: ImageMetadata;
 	canonical?: string;
 	noindex?: boolean;
+	article?: boolean;
+	pubDate?: Date;
+	author?: string;
+	section?: string;
+	tags?: string[];
 }
 
 const { 
@@ -15,7 +20,12 @@ const {
 	description, 
 	image,
 	canonical,
-	noindex = false 
+	noindex = false,
+	article = false,
+	pubDate,
+	author,
+	section,
+	tags = []
 } = Astro.props;
 ---
 
@@ -25,6 +35,11 @@ const {
 	image={image}
 	canonical={canonical}
 	noindex={noindex}
+	article={article}
+	pubDate={pubDate}
+	author={author}
+	section={section}
+	tags={tags}
 >
 	<div class="container-content">
 		<slot />

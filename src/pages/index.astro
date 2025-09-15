@@ -12,7 +12,12 @@ const latestNotes = allNotes
 	.slice(0, 6); // Show latest 6 notes
 ---
 
-<PageLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+<PageLayout 
+	title={SITE_TITLE} 
+	description={SITE_DESCRIPTION}
+	section="Home"
+	tags={['field notes', 'humanity', 'modern life', 'personal development']}
+>
 	<HeroSection 
 		title={SITE_TITLE}
 		subtitle="An open-source manual"

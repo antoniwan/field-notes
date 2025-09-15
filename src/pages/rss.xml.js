@@ -9,8 +9,18 @@ export async function GET(context) {
 		description: SITE_DESCRIPTION,
 		site: context.site,
 		items: posts.map((post) => ({
-			...post.data,
+			title: post.data.title,
+			description: post.data.description,
+			pubDate: post.data.pubDate,
 			link: `/notes/${post.id}/`,
+			guid: `/notes/${post.id}/`,
+			category: post.data.category,
+			tags: post.data.tags,
 		})),
+		customData: `<language>en-us</language>
+		<managingEditor>fieldnotes@example.com (Field Notes)</managingEditor>
+		<webMaster>fieldnotes@example.com (Field Notes)</webMaster>
+		<lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+		<generator>Astro RSS</generator>`,
 	});
 }
